@@ -51,9 +51,9 @@ export default function AppHeader({
           {showBack && (
             <IconButton
               accessibilityLabel={strings.a11yBack}
-              icon={(props) => <Icon name="chevron-left" color={props.color} size={24} />}
-              iconColor={colors.textPrimary}
-              size={24}
+              icon={(props) => <Icon name="chevron-left" color={props.color} size={28} />}
+              iconColor={colors.textSecondary}
+              size={28}
               onPress={onPressBack}
             />
           )}
@@ -66,18 +66,18 @@ export default function AppHeader({
           {/* share button */}
           <IconButton
             accessibilityLabel={strings.a11yShare}
-            icon={(props) => <Icon name="share-variant" color={props.color} size={24} />}
-            iconColor={colors.textPrimary}
-            size={24}
+            icon={(props) => <Icon name="share-variant" color={props.color} size={28} />}
+            iconColor={colors.textSecondary}
+            size={28}
             style={{ marginHorizontal: 1 }}
             onPress={onPressShare}
           />
           <View style={{ position: 'relative' }}>
             <IconButton
               accessibilityLabel={strings.a11yMessages}
-              icon={(props) => <Icon name="email-outline" color={props.color} size={24} />}
-              iconColor={colors.textPrimary}
-              size={24}
+              icon={(props) => <Icon name="email-outline" color={props.color} size={28} />}
+              iconColor={colors.textSecondary}
+              size={28}
               style={{ marginHorizontal: 1 }}
               onPress={onPressMessages}
             />
@@ -89,9 +89,9 @@ export default function AppHeader({
           </View>
           <IconButton
             accessibilityLabel={strings.a11yProfile}
-            icon={(props) => <Icon name="account-circle-outline" color={props.color} size={24} />}
-            iconColor={colors.textPrimary}
-            size={24}
+            icon={(props) => <Icon name="account-circle-outline" color={props.color} size={28} />}
+            iconColor={colors.textSecondary}
+            size={28}
             style={{ marginHorizontal: 1 }}
             onPress={onPressProfile}
           />
@@ -110,12 +110,12 @@ const styles = StyleSheet.create({
   header: {
     // tornar o header mais compacto para as proporções desejadas
     // reduzir o padding superior para diminuir a altura total
-    paddingTop: 4,
-    paddingLeft: layout.floatingHorizontal + 4,
+    paddingTop: 12,
+    paddingLeft: 20,
     // puxar os ícones um pouco mais para a direita reduzindo o paddingRight
     paddingRight: Math.max(8, layout.floatingHorizontal - 6),
     // reduzir o espaçamento inferior para aproximar o texto da borda inferior
-    paddingBottom: 0,
+    paddingBottom: 12,
     backgroundColor: colors.headerBackground,
     flexDirection: 'row',
     alignItems: 'center',
@@ -134,13 +134,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.12,
     shadowRadius: 4,
   },
-  hello: { color: colors.textPrimary, fontSize: 14, fontWeight: '700', opacity: 0.95, marginBottom: 2 },
-  name: { color: colors.textPrimary, fontSize: 18, fontWeight: '700', letterSpacing: 0.2, marginTop: 0 },
+  hello: { color: colors.textSecondary, fontSize: 16, fontWeight: '700', opacity: 0.95, marginBottom: 2 },
+  name: { color: colors.textSecondary, fontSize: 22, fontWeight: '700', letterSpacing: 0.2, marginTop: 0 },
   titleWrapper: { flexDirection: 'column', justifyContent: 'center' },
-  titleTextWrapper: { marginLeft: (layout.floatingHorizontal + 4) * 1.05 },
+  titleTextWrapper: { marginLeft: 0 },
   // move the action icons down so they align with the second line ("Monica")
   headerActions: { flexDirection: 'row', alignItems: 'center', marginTop: 8 },
-  badge: { position: 'absolute', top: 2, right: 2, backgroundColor: '#D96F6F' },
+  badge: { position: 'absolute', top: 8, right: 2, backgroundColor: '#D96F6F' },
 });
 
 // ...existing code...

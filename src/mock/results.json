@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=60&auto=format&fit=crop",
+    "dateLabel": "21 de maio de 2025"
+  },
+  {
+    "id": "2",
+    "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=60&auto=format&fit=crop",
+    "dateLabel": "10 de setembro de 2024"
+  },
+  {
+    "id": "3",
+    "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=60&auto=format&fit=crop",
+    "dateLabel": "5 de março de 2024"
+  },
+  {
+    "id": "4",
+    "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=60&auto=format&fit=crop",
+    "dateLabel": "8 de janeiro de 2024"
+  },
+  {
+    "id": "5",
+    "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=60&auto=format&fit=crop",
+    "dateLabel": "16 de novembro de 2023"
+  }
+]

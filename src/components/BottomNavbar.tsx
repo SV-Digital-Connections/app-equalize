@@ -7,7 +7,7 @@ import Icon from '../design-system/Icon';
 import { colors } from '../theme/colors';
 
 // Componente de ícone personalizado para identidade
-const IdentityIcon = ({ color = colors.navText }: { color?: string }) => (
+const IdentityIcon = ({ color = colors.textSecondary }: { color?: string }) => (
   <View style={[styles.customIcon, { borderColor: color }]}>
     <View style={[styles.face, { borderColor: color }]}>
       {/* Olhos */}
@@ -55,13 +55,13 @@ export default function BottomNavbar({ items }: Props) {
           <TouchableRipple key={it.key} onPress={it.onPress} borderless style={styles.itemTouchable}>
             <View style={styles.item}>
               {it.customIcon === 'identity' ? (
-                <IdentityIcon color={colors.navText} />
+                <IdentityIcon color={colors.textSecondary} />
               ) : it.imageSource ? (
                 <Image source={it.imageSource} style={styles.iconImage} />
               ) : (
-                <Icon name={it.icon!} size={24} color={colors.navText} />
+                <Icon name={it.icon!} size={36} color={colors.textSecondary} />
               )}
-              <Text style={styles.label} numberOfLines={1} ellipsizeMode="clip" allowFontScaling={false}>
+              <Text style={styles.label} numberOfLines={1} adjustsFontSizeToFit allowFontScaling={false}>
                 {it.label}
               </Text>
             </View>
@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    paddingHorizontal: 12,
-    paddingBottom: Platform.select({ ios: 20, android: 12, default: 12 }),
-    paddingTop: 8,
+    paddingHorizontal: 4,
+    paddingBottom: Platform.select({ ios: 8, android: 4, default: 4 }),
+    paddingTop: 4,
     backgroundColor: 'transparent',
   },
   inner: {
@@ -89,78 +89,79 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 14,
-    paddingVertical: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 10,
   },
   itemTouchable: { flex: 1, borderRadius: 12 },
-  item: { alignItems: 'center', justifyContent: 'center' },
+  item: { alignItems: 'center', justifyContent: 'center', gap: 2 },
   label: {
-    color: colors.navText,
-    marginTop: 4,
-    fontSize: 9,
-    lineHeight: 11,
-    maxWidth: 64,
+    color: colors.textSecondary,
+    marginTop: 2,
+    fontSize: 8,
+    lineHeight: 10,
+    maxWidth: 70,
     textAlign: 'center',
+    fontWeight: '500',
   },
-  iconImage: { width: 24, height: 24, tintColor: colors.navText },
+  iconImage: { width: 36, height: 36, tintColor: colors.textSecondary },
   // Estilos para o ícone customizado de identidade
   customIcon: {
-    width: 24,
-    height: 24,
+    width: 36,
+    height: 36,
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
   },
   face: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    borderWidth: 1.2,
+    width: 21,
+    height: 21,
+    borderRadius: 10.5,
+    borderWidth: 1.8,
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
   },
   eyes: {
     flexDirection: 'row',
-    marginTop: 3,
-    marginBottom: 1,
+    marginTop: 4,
+    marginBottom: 1.5,
   },
   eye: {
-    width: 2,
-    height: 2,
-    borderRadius: 1,
-    marginHorizontal: 1.5,
+    width: 3,
+    height: 3,
+    borderRadius: 1.5,
+    marginHorizontal: 2,
   },
   smile: {
-    width: 6,
-    height: 3,
-    borderBottomWidth: 1,
-    borderBottomLeftRadius: 3,
-    borderBottomRightRadius: 3,
+    width: 9,
+    height: 4.5,
+    borderBottomWidth: 1.5,
+    borderBottomLeftRadius: 4.5,
+    borderBottomRightRadius: 4.5,
   },
   hair: {
     position: 'absolute',
-    top: -2,
-    width: 16,
-    height: 8,
-    borderTopWidth: 1.5,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    top: -3,
+    width: 24,
+    height: 12,
+    borderTopWidth: 2,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
   },
   leftDots: {
     position: 'absolute',
-    left: 2,
-    top: 6,
+    left: 3,
+    top: 9,
   },
   rightDots: {
     position: 'absolute',
-    right: 2,
-    top: 6,
+    right: 3,
+    top: 9,
   },
   dot: {
-    width: 1.5,
-    height: 1.5,
-    borderRadius: 0.75,
-    marginVertical: 1,
+    width: 2,
+    height: 2,
+    borderRadius: 1,
+    marginVertical: 1.5,
   },
 });

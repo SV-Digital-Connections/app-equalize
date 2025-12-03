@@ -25,7 +25,7 @@ export class ResiliencePipelineBuilder {
     return this;
   }
 
-  build(base: HomeRepository): HomeRepository {
+  build<T extends HomeRepository>(base: T): T {
     let repo: HomeRepository = base;
     if (this.withTimeoutMs != null) {
       repo = new TimeoutRepositoryDecorator(repo, this.withTimeoutMs);
@@ -40,6 +40,6 @@ export class ResiliencePipelineBuilder {
         this.withBreaker.cooldownMs,
       );
     }
-    return repo;
+    return repo as T;
   }
 }

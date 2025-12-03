@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Platform, type TextStyle } from 'react-native';
+import { View, StyleSheet, Platform, type TextStyle, ActivityIndicator, Alert } from 'react-native';
 import { Text, TextInput } from 'react-native-paper';
 import { BrandGradientTitle } from '../design-system/Typography';
 import { PrimaryButton } from '../design-system/Buttons';
 import { colors } from '../theme/colors';
+import { useAuth } from '../providers/AuthProvider';
+import { isMockMode } from '../app/config';
 
 type Props = {
   onEnter: () => void;
@@ -15,6 +17,36 @@ const titleFontWeight: TextStyle['fontWeight'] =
 export default function LoginScreen({ onEnter }: Props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const { login, isLoading } = useAuth();
+
+  const handleLogin = async () => {
+    // In mock mode, skip authentication and navigate directly
+    if (isMockMode()) {
+      onEnter();
+      return;
+    }
+
+    if (!email || !password) {
+      Alert.alert('Erro', 'Por favor, preencha email e senha');
+      return;
+    }
+
+    try {
+      await login({
+        email: email.trim(),
+        password,
+        device_name: 'mobile-app', // ou use Device.modelName se disponível
+      });
+      // Login successful, navigate
+      onEnter();
+    } catch (error) {
+      Alert.alert(
+        'Erro no login',
+        error instanceof Error ? error.message : 'Não foi possível fazer login. Verifique suas credenciais.',
+      );
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerSpace} />
@@ -38,6 +70,9 @@ export default function LoginScreen({ onEnter }: Props) {
           selectionColor={colors.buttonBackground}
           contentStyle={styles.inputContent}
           theme={{ colors: { background: colors.inputBackground } }}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          editable={!isLoading}
         />
         <TextInput
           mode="flat"
@@ -52,10 +87,11 @@ export default function LoginScreen({ onEnter }: Props) {
           selectionColor={colors.buttonBackground}
           contentStyle={styles.inputContent}
           theme={{ colors: { background: colors.inputBackground } }}
+          editable={!isLoading}
         />
 
-        <PrimaryButton onPress={onEnter} style={styles.button}>
-          Entrar
+        <PrimaryButton onPress={handleLogin} style={styles.button} disabled={isLoading}>
+          {isLoading ? <ActivityIndicator color={colors.textPrimary} /> : 'Entrar'}
         </PrimaryButton>
       </View>
     </View>

@@ -1,0 +1,43 @@
+{
+  "subtitle": "Tratamentos para a recuperação da vitalidade da sua pele",
+  "mainText": "Os tratamentos dermatológicos regenerativos representam uma revolução no cuidado da pele, focando não apenas na estética, mas na saúde como um todo. Eles visam recuperar algo que você perdeu com o tempo para restaurar a estruturação de base que determina o contorno facial bem como a qualidade da pele. Isso vai depender do diagnóstico. Com base na funcionalidade da sua pele criamos um plano de tratamentos regenerativos para restaurar os tecidos que sustentam a pele. Além disso, focamos também em devolver a estrutura e a firmeza da pele - que vão diminuindo com o tempo e com o acúmulo de danos externos que sofremos, como poluição e radiação UV. Depois disso traçamos a trilha de manutenção dos resultados.",
+  "proceduresTitle": "Procedimentos / Ações",
+  "procedures": [
+    {
+      "id": "1",
+      "dateLabel": "08 de agosto de 2025",
+      "title": "Ultraformer MPT - Completo",
+      "status": "scheduled"
+    },
+    {
+      "id": "2",
+      "dateLabel": "17 de setembro de 2025",
+      "title": "Hydrafacial - 30 Minutos",
+      "status": "scheduled"
+    },
+    {
+      "id": "3",
+      "dateLabel": "15 de setembro de 2025",
+      "title": "Ultraformer MPT - Completo",
+      "status": "scheduled"
+    },
+    {
+      "id": "4",
+      "dateLabel": "15 de julho de 2025",
+      "title": "Slimming-Facial",
+      "status": "done"
+    },
+    {
+      "id": "5",
+      "dateLabel": "29 de maio de 2025",
+      "title": "Slimming-Facial",
+      "status": "done"
+    },
+    {
+      "id": "6",
+      "dateLabel": "10 de fevereiro de 2025",
+      "title": "Slimming-Facial",
+      "status": "done"
+    }
+  ]
+}

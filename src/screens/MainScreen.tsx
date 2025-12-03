@@ -29,6 +29,7 @@ export default function MainScreen() {
   );
   const [modalVisible, setModalVisible] = React.useState(false);
   const [modalContent, setModalContent] = React.useState({ title: '', content: '' });
+  const [scrollY, setScrollY] = React.useState(0);
   const { open: openScale, close: closeScale } = useScaleModal();
 
   const openModal = React.useCallback(
@@ -61,14 +62,20 @@ export default function MainScreen() {
         dateLabel={state?.upcoming.dateLabel}
         name={state?.upcoming.name}
         onMeasured={setFloatH}
+        onPress={() => navigate('NextSteps')}
+        scrollY={scrollY}
       />
 
-      <ScrollView contentContainerStyle={[styles.scroll, { paddingTop: 0 }]}>
+      <ScrollView
+        contentContainerStyle={[styles.scroll, { paddingTop: 0 }]}
+        onScroll={(e) => setScrollY(e.nativeEvent.contentOffset.y)}
+        scrollEventThrottle={16}
+      >
         <View style={{ height: spacerHeight }} />
         <NewsHero
           onSeeMore={() => navigate('News')}
-          heroImageUri={state?.results?.[0]?.imageUrl}
-          heroVideoUri={'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}
+          heroImageUri={state?.hero?.imageUri}
+          heroVideoUri={state?.hero?.videoUri}
         />
         <ResultsCarousel results={state?.results ?? []} onSeeAll={() => navigate('Results')} />
 
@@ -115,6 +122,9 @@ export default function MainScreen() {
             onItemPress={(item) =>
               openModal(item.title, strings.modalDetailsTemplate(item.title, item.dateLabel, item.status))
             }
+            onCareSeeMore={() => navigate('Care')}
+            onRegenerationSeeMore={() => navigate('Regeneration')}
+            onMaintenanceSeeMore={() => navigate('Maintenance')}
           />
         )}
       </ScrollView>

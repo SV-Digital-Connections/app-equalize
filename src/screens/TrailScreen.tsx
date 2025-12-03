@@ -3,81 +3,21 @@ import { View, StyleSheet, ScrollView, TouchableOpacity, Animated } from 'react-
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, Button } from 'react-native-paper';
 import { colors } from '../theme/colors';
+import { layout } from '../theme/layout';
 import BottomNavbar from '../components/BottomNavbar';
 import { useRouter } from '../app/router/RouterProvider';
 import Icon from '../design-system/Icon';
 import AppHeader from '../components/AppHeader';
+import { loadTrailData, loadUserData } from '../mock';
 
 export default function TrailScreen() {
   const { navigate, goBack } = useRouter();
   const [expandedCard, setExpandedCard] = React.useState<number | null>(null);
+  const trailData = loadTrailData();
+  const trailItems = trailData.trailItems;
+  const userData = loadUserData();
 
   type Status = 'calendar' | 'check' | 'close' | 'circle';
-  const trailItems = [
-    {
-      id: 1,
-      date: '17 de setembro de 2025',
-      title: 'Ultraformer MPT',
-      category: 'Regeneração',
-      icon: 'auto-fix',
-      status: 'calendar' as Status,
-      hasDownload: true,
-    },
-    {
-      id: 2,
-      date: '17 de julho de 2025',
-      title: 'Rever Programação',
-      category: 'Checkups',
-      icon: 'clipboard-pulse-outline',
-      status: 'check' as Status,
-      hasDownload: true,
-    },
-    {
-      id: 3,
-      date: '08 de maio de 2025',
-      title: 'Receita manipulados',
-      category: 'Cuidados',
-      icon: 'molecule',
-      status: 'check' as Status,
-      hasDownload: true,
-    },
-    {
-      id: 4,
-      date: '10 de março de 2025',
-      title: 'Hydrafacial -30 Minutos',
-      category: 'Regeneração',
-      icon: 'auto-fix',
-      status: 'check' as Status,
-      hasDownload: true,
-    },
-    {
-      id: 5,
-      date: '27 de fevereiro de 2025',
-      title: 'Ellansé M',
-      category: 'Manutenção',
-      icon: 'cog',
-      status: 'close' as Status,
-      hasDownload: true,
-    },
-    {
-      id: 6,
-      date: '27 de fevereiro de 2025',
-      title: 'Acompanhamento',
-      category: 'Checkups',
-      icon: 'clipboard-pulse-outline',
-      status: 'check' as Status,
-      hasDownload: true,
-    },
-    {
-      id: 7,
-      date: '20 de janeiro de 2025',
-      title: 'Acompanhamento',
-      category: 'Checkups',
-      icon: 'clipboard-pulse-outline',
-      status: 'check' as Status,
-      hasDownload: true,
-    },
-  ];
 
   const handleCardPress = (itemId: number) => {
     setExpandedCard(expandedCard === itemId ? null : itemId);
@@ -91,24 +31,25 @@ export default function TrailScreen() {
   };
 
   const renderStatusIcon = (status: Status) => {
-    const iconColor = colors.textMuted;
+    const iconColor = colors.textSecondary;
     switch (status) {
       case 'calendar':
-        return <Icon name="calendar-outline" size={20} color={iconColor} />;
+        return <Icon name="calendar-month" size={28} color={iconColor} />;
       case 'check':
-        return <Icon name="check-circle-outline" size={20} color={iconColor} />;
+        return <Icon name="check-circle" size={28} color={iconColor} />;
       case 'close':
-        return <Icon name="close-circle-outline" size={20} color={iconColor} />;
+        return <Icon name="close-circle" size={28} color={iconColor} />;
       default:
-        return <Icon name="circle-outline" size={20} color={iconColor} />;
+        return <Icon name="circle-outline" size={28} color={iconColor} />;
     }
   };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <AppHeader
-        greeting="Olá,"
-        name="Usuário!"
+        greeting={userData.greeting}
+        name={userData.name}
+        unreadCount={userData.unreadCount}
         onPressMessages={() => navigate('Messages')}
         onPressProfile={() => navigate('Account')}
         includeSpacer={false}
@@ -117,24 +58,15 @@ export default function TrailScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         {/* Título da seção */}
         <View style={styles.titleSection}>
-          <Icon name="map-marker-path" size={24} color={colors.textPrimary} />
+          <Icon name="map-marker-path" size={24} color={colors.textSecondary} />
           <Text style={styles.sectionTitle}>Sua trilha</Text>
         </View>
 
         {/* Subtítulo */}
-        <Text style={styles.subtitle}>Sua trilha no Equalize</Text>
+        <Text style={styles.subtitle}>{trailData.subtitle}</Text>
 
         {/* Texto principal */}
-        <Text style={styles.mainText}>
-          A trilha Equalize orienta e informa você. Ali você identifica quais são os melhores tratamentos de
-          acordo com a identidade da sua pele. Ao acessá-la você consegue saber a qualquer momento quais
-          procedimentos você realizou, quando e o que foram os resultados alcançados. Dessa forma, é possível
-          acompanhar evolutivamente as características da sua identidade ao longo do tempo e a ação dos
-          tratamentos na prevenção, regeneração, manutenção e recuperação da saúde da sua pele e de
-          características físicas anatômicas que interferem na sua aparência. A sua Trilha é uma forma segura
-          para você organizar os cuidados com a sua pele - tanto em relação ao tempo quanto ao investimento
-          necessário. Tudo na sua mão, ao seu alcance, com o seu conhecimento.
-        </Text>
+        <Text style={styles.mainText}>{trailData.mainText}</Text>
 
         {/* Trail Items */}
         <View style={styles.trailItemsContainer}>
@@ -222,28 +154,28 @@ const styles = StyleSheet.create({
   content: {
     padding: 20,
     paddingBottom: 140, // leave space for bottom navbar
-    paddingTop: 120,
+    paddingTop: 100,
   },
   titleSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 16,
     gap: 8,
   },
   sectionTitle: {
-    color: colors.textPrimary,
-    fontSize: 24,
+    color: colors.textSecondary,
+    fontSize: layout.sectionTitleFontSize,
     fontWeight: '700',
   },
   subtitle: {
-    color: colors.textPrimary,
-    fontSize: 18,
+    color: colors.textSecondary,
+    fontSize: layout.sectionTitleFontSize,
     fontWeight: '600',
-    marginBottom: 20,
+    marginBottom: 16,
     lineHeight: 24,
   },
   mainText: {
-    color: colors.textMuted,
+    color: colors.textSecondary,
     fontSize: 14,
     lineHeight: 22,
     textAlign: 'justify',

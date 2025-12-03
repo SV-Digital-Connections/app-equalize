@@ -3,18 +3,28 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
+import { layout } from '../theme/layout';
 import BottomNavbar from '../components/BottomNavbar';
 import { useRouter } from '../app/router/RouterProvider';
 import Icon from '../design-system/Icon';
 import AppHeader from '../components/AppHeader';
+import { loadCheckupsData, loadUserData } from '../mock';
 
 export default function CheckUps() {
   const { navigate, goBack } = useRouter();
+  const checkupsData = loadCheckupsData();
+  const userData = loadUserData();
+
+  const getIconByStatus = (status: string) => {
+    return status === 'done' ? 'check-circle' : 'calendar-month';
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <AppHeader
-        greeting="Olá,"
-        name="Usuário!"
+        greeting={userData.greeting}
+        name={userData.name}
+        unreadCount={userData.unreadCount}
         onPressMessages={() => navigate('Messages')}
         onPressProfile={() => navigate('Account')}
         includeSpacer={false}
@@ -23,82 +33,35 @@ export default function CheckUps() {
       <ScrollView contentContainerStyle={styles.content}>
         {/* Título da seção */}
         <View style={styles.titleSection}>
-          <Icon name="clipboard-pulse-outline" size={24} color={colors.textPrimary} />
+          <Icon name="clipboard-pulse-outline" size={24} color={colors.textSecondary} />
           <Text style={styles.sectionTitle}>Checkups</Text>
         </View>
 
         {/* Subtítulo */}
-        <Text style={styles.subtitle}>Sua trilha de tratamentos a longo prazo</Text>
+        <Text style={styles.subtitle}>{checkupsData.subtitle}</Text>
 
         {/* Texto principal */}
-        <Text style={styles.mainText}>
-          Os checkups são agendamentos feitos para checar a evolução dos tratamentos, para exame físico da
-          pele para checar surgimento de alguma lesão e dar continuidade a sua trilha de cuidados em casa e na
-          clínica.
-        </Text>
+        <Text style={styles.mainText}>{checkupsData.mainText}</Text>
 
         {/* Seção de procedimentos */}
-        <Text style={styles.proceduresTitle}>Procedimentos / Ações</Text>
+        <Text style={styles.proceduresTitle}>{checkupsData.proceduresTitle}</Text>
 
         {/* Timeline */}
         <View style={styles.timelineContainer}>
           {/* Linha vertical da timeline */}
           <View style={styles.timelineLine} />
 
-          {/* Item 1 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="calendar-outline" size={20} color={colors.textMuted} />
+          {checkupsData.procedures.map((procedure) => (
+            <View key={procedure.id} style={styles.timelineItem}>
+              <View style={styles.timelineIconContainer}>
+                <Icon name={getIconByStatus(procedure.status)} size={28} color={colors.textSecondary} />
+              </View>
+              <View style={styles.timelineContent}>
+                <Text style={styles.timelineDate}>{procedure.dateLabel}</Text>
+                <Text style={styles.timelineTitle}>{procedure.title}</Text>
+              </View>
             </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>08 de agosto de 2025</Text>
-              <Text style={styles.timelineTitle}>Rever Programação</Text>
-            </View>
-          </View>
-
-          {/* Item 2 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="check-circle-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>17 de setembro de 2025</Text>
-              <Text style={styles.timelineTitle}>Acompanhamento</Text>
-            </View>
-          </View>
-
-          {/* Item 3 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="check-circle-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>15 de setembro de 2025</Text>
-              <Text style={styles.timelineTitle}>Acompanhamento</Text>
-            </View>
-          </View>
-
-          {/* Item 4 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="check-circle-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>15 de julho de 2025</Text>
-              <Text style={styles.timelineTitle}>Acompanhamento</Text>
-            </View>
-          </View>
-
-          {/* Item 5 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="check-circle-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>29 de maio de 2025</Text>
-              <Text style={styles.timelineTitle}>Acompanhamento</Text>
-            </View>
-          </View>
+          ))}
         </View>
       </ScrollView>
 
@@ -145,35 +108,35 @@ const styles = StyleSheet.create({
   content: {
     padding: 20,
     paddingBottom: 140, // leave space for bottom navbar
-    paddingTop: 120,
+    paddingTop: 100,
   },
   titleSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 16,
     gap: 8,
   },
   sectionTitle: {
-    color: colors.textPrimary,
-    fontSize: 24,
+    color: colors.textSecondary,
+    fontSize: layout.sectionTitleFontSize,
     fontWeight: '700',
   },
   subtitle: {
-    color: colors.textPrimary,
-    fontSize: 18,
+    color: colors.textSecondary,
+    fontSize: layout.sectionTitleFontSize,
     fontWeight: '600',
-    marginBottom: 20,
+    marginBottom: 16,
     lineHeight: 24,
   },
   mainText: {
-    color: colors.textMuted,
+    color: colors.textSecondary,
     fontSize: 14,
     lineHeight: 22,
     textAlign: 'justify',
     marginBottom: 32,
   },
   proceduresTitle: {
-    color: colors.textPrimary,
+    color: colors.textSecondary,
     fontSize: 20,
     fontWeight: '700',
     marginBottom: 16,
@@ -185,12 +148,12 @@ const styles = StyleSheet.create({
   },
   timelineLine: {
     position: 'absolute',
-    left: 39,
-    top: 40,
+    left: 33,
+    top: 14,
     bottom: 20,
     width: 2,
-    backgroundColor: colors.textMuted,
-    opacity: 0.3,
+    backgroundColor: colors.textSecondary,
+    opacity: 0.4,
   },
   timelineItem: {
     flexDirection: 'row',
@@ -199,12 +162,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   timelineIconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background,
-    borderWidth: 2,
-    borderColor: colors.textMuted,
+    width: 28,
+    height: 28,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,

@@ -4,16 +4,19 @@ import { View, StyleSheet, ScrollView, PanResponder } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
+import { layout } from '../theme/layout';
 import MessagesSection from '../components/MessagesSection';
 import { useMessagesViewModel } from '../viewmodels/useMessagesViewModel';
 import AppHeader from '../components/AppHeader';
 import BottomNavbar from '../components/BottomNavbar';
 import { useRouter } from '../app/router/RouterProvider';
 import { strings } from '../app/strings';
+import { loadUserData } from '../mock';
 
 export default function MessagesScreen() {
   const { messages, unreadCount } = useMessagesViewModel();
   const { goBack, canGoBack, navigate } = useRouter();
+  const userData = loadUserData();
 
   // Edge-swipe back (da esquerda para direita)
   const panResponder = React.useMemo(
@@ -34,9 +37,9 @@ export default function MessagesScreen() {
   return (
     <SafeAreaView style={styles.container} {...panResponder.panHandlers}>
       <AppHeader
-        greeting={strings.hello}
-        name={strings.userName}
-        unreadCount={unreadCount}
+        greeting={userData.greeting}
+        name={userData.name}
+        unreadCount={userData.unreadCount}
         onPressMessages={() => {}}
       />
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -89,13 +92,13 @@ const styles = StyleSheet.create({
   scroll: { paddingBottom: 80 },
   titleSection: {
     paddingHorizontal: 20,
-    paddingTop: 115,
-    paddingBottom: 8,
+    paddingTop: layout.sectionTitleTopPadding + 20,
+    paddingBottom: 12,
   },
   sectionTitle: {
     color: colors.textPrimary,
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: layout.sectionTitleFontSize,
+    fontWeight: '700',
   },
   empty: { color: colors.textMuted, marginTop: 16, paddingHorizontal: 16 },
 });

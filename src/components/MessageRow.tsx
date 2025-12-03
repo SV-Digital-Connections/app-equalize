@@ -27,6 +27,7 @@ export default function MessageRow({ message }: MessageRowProps) {
 
   return (
     <TouchableOpacity onPress={toggleExpansion} activeOpacity={0.8}>
+      <View style={styles.dividerTop} />
       <View style={styles.row}>
         <View style={styles.titleRow}>
           <Text
@@ -63,7 +64,16 @@ export default function MessageRow({ message }: MessageRowProps) {
 }
 
 const styles = StyleSheet.create({
-  row: { paddingHorizontal: layout.screenPadding, paddingVertical: 14 },
+  dividerTop: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#FFFFFF',
+    opacity: 0.8,
+  },
+  row: {
+    paddingVertical: 12,
+    backgroundColor: colors.background,
+    marginBottom: 1,
+  },
   titleRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   rightIcons: {
     flexDirection: 'row',
@@ -72,21 +82,21 @@ const styles = StyleSheet.create({
     minWidth: 32,
     justifyContent: 'flex-end',
   },
-  unreadDot: { width: 4, height: 4, borderRadius: 2, backgroundColor: colors.textPrimary, opacity: 0.9 },
-  title: { fontSize: 18, letterSpacing: 0.15, flex: 1 },
-  titleUnread: { color: colors.textPrimary, fontWeight: '800' },
-  titleRead: { color: colors.textMuted, fontWeight: '700' },
-  date: { color: colors.textMuted, fontSize: 12, marginTop: 2 },
-  dateUnread: { color: colors.brandSoft },
-  preview: { marginTop: 6, fontSize: 13, lineHeight: 19 },
-  previewUnread: { color: colors.textPrimary, opacity: 0.85 },
-  previewRead: { color: colors.textMuted, opacity: 0.8 },
+  unreadDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: colors.textPrimary },
+  title: { fontSize: 16, letterSpacing: 0.15, flex: 1 },
+  titleUnread: { color: colors.textPrimary, fontWeight: '700' },
+  titleRead: { color: colors.textMuted, fontWeight: '600' },
+  date: { color: colors.textMuted, fontSize: 12, marginTop: 2, opacity: 0.7 },
+  dateUnread: { color: colors.textMuted },
+  preview: { marginTop: 6, fontSize: 14, lineHeight: 20 },
+  previewUnread: { color: colors.textPrimary, opacity: 0.95 },
+  previewRead: { color: colors.textMuted, opacity: 0.7 },
   expandedContent: {
     marginTop: 12,
     paddingTop: 12,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#FFFFFF',
-    opacity: 0.8,
+    borderTopColor: colors.textMuted,
+    opacity: 0.5,
   },
   expandedText: {
     fontSize: 14,
@@ -94,5 +104,5 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     textAlign: 'justify',
   },
-  divider: { height: StyleSheet.hairlineWidth, backgroundColor: '#FFFFFF', marginTop: 14, opacity: 0.8 },
+  divider: { height: StyleSheet.hairlineWidth, backgroundColor: colors.divider, marginTop: 10, opacity: 0.2 },
 });

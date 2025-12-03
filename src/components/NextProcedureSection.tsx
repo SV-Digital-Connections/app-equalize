@@ -1,6 +1,6 @@
 import React from 'react';
 import type { LayoutChangeEvent, ViewProps } from 'react-native';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
 import { RoundedCard, Divider } from './Card';
@@ -16,140 +16,118 @@ type Props = ViewProps & {
   hideIcon?: boolean;
   hideMoreInfo?: boolean;
   customLayout?: boolean;
+  onPress?: () => void;
 };
 
 export default function NextProcedureSection({
-  title = 'Próximo procedimento:',
-  dateLabel = '—',
-  name = '',
+  title = 'Próximos passos:',
+  dateLabel = '25 de agosto',
+  name = 'Fio Silhouett',
   onMeasured,
   style,
   hideIcon = false,
   hideMoreInfo = false,
   customLayout = false,
+  onPress,
   ...rest
 }: Props) {
   return (
-    <View style={[styles.wrapper, style]} {...rest}>
-      <RoundedCard
-        style={styles.card}
-        onLayout={(e: LayoutChangeEvent) => onMeasured?.(e.nativeEvent.layout.height)}
-        accessibilityRole="summary"
-        accessibilityLabel="Próximo procedimento"
-      >
-        {customLayout ? (
-          <View style={styles.customLayoutContainer}>
-            <View style={styles.customLayoutHeader}>
-              <Text style={styles.customHeaderTitle}>{title}</Text>
-              <Text style={styles.customHeaderDate}>{dateLabel}</Text>
+    <TouchableOpacity
+      style={[styles.wrapper, style]}
+      onPress={onPress}
+      activeOpacity={0.8}
+      disabled={!onPress}
+      {...rest}
+    >
+      <View style={styles.container}>
+        <Text style={styles.titleText}>{title}</Text>
+        <RoundedCard
+          style={styles.card}
+          onLayout={(e: LayoutChangeEvent) => onMeasured?.(e.nativeEvent.layout.height)}
+          accessibilityRole="button"
+          accessibilityLabel="Próximos passos"
+        >
+          <View style={styles.newLayoutContainer}>
+            <View style={styles.leftContent}>
+              <Icon name="calendar-month" size={28} color={colors.textPrimary} />
+              <View style={styles.textContent}>
+                <Text style={styles.dateText}>{dateLabel}</Text>
+                <Text style={styles.nameText}>{name}</Text>
+              </View>
             </View>
-            <Text style={styles.customSubtitle}>{name}</Text>
+            <View style={styles.rightContent}>
+              <Text style={styles.moreInfoText}>Mais informações</Text>
+              <Icon name="chevron-right" size={24} color={colors.textMuted} />
+            </View>
           </View>
-        ) : (
-          <>
-            <SectionHeader title={title} style={styles.sectionHeader} />
-            <ListRow
-              left={hideIcon ? undefined : <Icon name="calendar-month-outline" size={28} />}
-              title={dateLabel}
-              subtitle={name}
-              right={
-                hideMoreInfo ? undefined : (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ color: colors.textMuted, fontSize: 16 }}>Mais informações</Text>
-                    <Text style={{ color: colors.textMuted, marginLeft: 4, fontSize: 18 }}>›</Text>
-                  </View>
-                )
-              }
-            />
-          </>
-        )}
-      </RoundedCard>
-
-      {/* Linha divisória branca no container do background translúcido */}
-      <View style={styles.dividerContainer}>
-        <Divider style={styles.whiteDivider} />
+        </RoundedCard>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  // wrapper sem padding horizontal para que o cartão interno possa preencher até as laterais
   wrapper: {
     paddingHorizontal: 0,
-    position: 'relative', // para permitir posicionamento absoluto da linha
+    position: 'relative',
+  },
+  container: {
+    backgroundColor: 'transparent',
+    paddingTop: 8,
+  },
+  titleText: {
+    color: colors.textSecondary,
+    fontSize: 14,
+    marginBottom: 0,
+    marginLeft: 16,
   },
   card: {
-    // tornar o cartão mais escuro e fosco
-    backgroundColor: 'rgba(0,0,0,0.50)',
+    backgroundColor: 'transparent',
     borderRadius: 0,
-    // borda visível, suave
-    borderWidth: 1,
-    // borda escura sutil
-    borderColor: 'rgba(0,0,0,0.35)',
-    overflow: 'hidden',
-    paddingTop: 8, // espaço interno adicionado equivalente ao gap removido
-    paddingBottom: 8, // valor original
-    // deixar um pequeno padding interno nas laterais para o conteúdo não encostar na borda
-    paddingHorizontal: 14,
-    // sombra para dar profundidade ao cartão
-    shadowColor: '#000',
-    shadowOpacity: 0.32,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 10,
+    borderWidth: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: '#FFFFFF',
+    overflow: 'visible',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    shadowColor: 'transparent',
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    shadowOffset: { width: 0, height: 0 },
+    elevation: 0,
   },
-  sectionHeader: {
-    paddingHorizontal: 10,
-    // reduzir o marginLeft do título interno
-    // o SectionHeader usa marginLeft via styles.title (spacing.sm)
-    // aqui reduzimos o padding horizontal geral para aproximar o título da esquerda
-  },
-  dividerContainer: {
-    position: 'absolute',
-    bottom: 0.1, // 0,1px de distância da borda inferior do wrapper
-    left: 2, // 2px de distância da borda esquerda
-    right: 2, // 2px de distância da borda direita
-  },
-  whiteDivider: {
-    backgroundColor: '#FFFFFF',
-  },
-  customLayoutContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-  },
-  customLayoutHeader: {
+  newLayoutContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    justifyContent: 'space-between',
   },
-  customHeaderTitle: {
-    color: colors.textPrimary,
+  leftContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    flex: 1,
+  },
+  textContent: {
+    flex: 1,
+  },
+  dateText: {
+    color: colors.textSecondary,
     fontSize: 16,
     fontWeight: '600',
+    marginBottom: 2,
   },
-  customHeaderDate: {
-    color: colors.textMuted,
+  nameText: {
+    color: colors.textSecondary,
     fontSize: 14,
-    textAlign: 'right',
   },
-  customLayoutContent: {
-    alignItems: 'flex-end',
-    width: '100%',
+  rightContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   },
-  customTitle: {
-    color: colors.textMuted,
-    fontSize: 16,
-    textAlign: 'right',
-    alignSelf: 'flex-end',
-  },
-  customSubtitle: {
-    color: colors.textMuted,
+  moreInfoText: {
+    color: colors.textSecondary,
     fontSize: 14,
-    textAlign: 'center',
-    marginTop: 8,
-    marginBottom: 12,
-    paddingHorizontal: 20,
   },
 });

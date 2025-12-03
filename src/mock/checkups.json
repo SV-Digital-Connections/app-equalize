@@ -1,0 +1,37 @@
+{
+  "subtitle": "Sua trilha de tratamentos a longo prazo",
+  "mainText": "Os checkups são agendamentos feitos para checar a evolução dos tratamentos, para exame físico da pele para checar surgimento de alguma lesão e dar continuidade a sua trilha de cuidados em casa e na clínica.",
+  "proceduresTitle": "Procedimentos / Ações",
+  "procedures": [
+    {
+      "id": "1",
+      "dateLabel": "08 de agosto de 2025",
+      "title": "Rever Programação",
+      "status": "scheduled"
+    },
+    {
+      "id": "2",
+      "dateLabel": "17 de setembro de 2025",
+      "title": "Acompanhamento",
+      "status": "done"
+    },
+    {
+      "id": "3",
+      "dateLabel": "15 de setembro de 2025",
+      "title": "Acompanhamento",
+      "status": "done"
+    },
+    {
+      "id": "4",
+      "dateLabel": "15 de julho de 2025",
+      "title": "Acompanhamento",
+      "status": "done"
+    },
+    {
+      "id": "5",
+      "dateLabel": "29 de maio de 2025",
+      "title": "Acompanhamento",
+      "status": "done"
+    }
+  ]
+}

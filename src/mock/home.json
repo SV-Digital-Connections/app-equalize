@@ -1,0 +1,52 @@
+{
+  "user": {
+    "greeting": "Olá,",
+    "name": "Monica!"
+  },
+  "upcoming": {
+    "dateLabel": "25 de agosto",
+    "name": "Fio Silhouett"
+  },
+  "unreadCount": 3,
+  "hero": {
+    "imageUri": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&q=80&auto=format&fit=crop",
+    "videoUri": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+  },
+  "featuredResults": [
+    {
+      "id": "1",
+      "imageUrl": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&q=80&auto=format&fit=crop",
+      "title": "Tratamento Facial",
+      "date": "15 de março de 2025",
+      "category": "Regeneração"
+    },
+    {
+      "id": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1598439210625-5067c578f3f6?w=800&q=80&auto=format&fit=crop",
+      "title": "Peeling Químico",
+      "date": "08 de fevereiro de 2025",
+      "category": "Manutenção"
+    },
+    {
+      "id": "3",
+      "imageUrl": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80&auto=format&fit=crop",
+      "title": "Hidratação Profunda",
+      "date": "20 de janeiro de 2025",
+      "category": "Cuidados"
+    },
+    {
+      "id": "4",
+      "imageUrl": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800&q=80&auto=format&fit=crop",
+      "title": "Laser Facial",
+      "date": "12 de dezembro de 2024",
+      "category": "Regeneração"
+    },
+    {
+      "id": "5",
+      "imageUrl": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=800&q=80&auto=format&fit=crop",
+      "title": "Microagulhamento",
+      "date": "05 de novembro de 2024",
+      "category": "Manutenção"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "description": "A sua rotina diária de cuidados com a pele",
+  "mainText": "É meu papel como dermatologista orientar sobre os produtos e passos ideais para seu tipo de pele. A consistência é a chave para alcançar resultados duradouros, já que os efeitos dos cuidados diários são cumulativos e transformadores ao longo do tempo. Portanto, investir em uma rotina de cuidados com a pele em casa é tão importante quanto os tratamentos realizados no consultório. Esse cuidado garante uma pele mais bonita, saudável e preparada para os desafios diários e os avanços estéticos proporcionados pela dermatologia. De uma forma geral a orientação é sempre: 1) higienizar com sabonetes, solução micelar, tônicos quando necessários - manhã e noite ao redor dos olhos - manhã e noite 2) Ativos específicos para sua condição de pele (uma creme diurno e um noturno) 3) Hidratante - manhã e noite 4) Filtro solar pela manhã e reaplicar à tarde (ele não dura o dia todo). O ideal seria reaplicar pelo menos mais uma vez no meio do dia.",
+  "recipes": [
+    {
+      "id": "1",
+      "date": "08 de agosto de 2025",
+      "title": "Receita manipulados",
+      "author": "Sheyla Cristina M de Oliveira",
+      "status": "cancelled",
+      "expanded": true,
+      "pdfFileName": "Arquivo.pdf",
+      "details": [
+        {
+          "label": "Uso oral:",
+          "content": "1) Gluconolactona .......................4,0% Ac.\nGlicólico.................................. 4,0%\nAloe Glucan...............................2,0%\nEss. Butrit..................................0,3%\nEspuma de Limpeza Plus qsp.....100ml\nLavar o rosto manhã e noite."
+        },
+        {
+          "label": "2) Neoxadiol sérum Aplicar na face manhã e noite após lavar o rosto.",
+          "content": "Eye 3 D.......................................4,0%\nAmplified Peptide.......................2,0%\nNanoBTX......................................5,0% Omega\nPlus............................................2,0% Coffeesilm.....................3,0%\nEyeseril.......................................3,0%\nCreme ADO Plus qsp...................150g\nAplicar ao redor dos olhos manhã e noite."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "date": "08 de agosto de 2025",
+      "title": "Receita manipulados",
+      "author": "Sheyla Cristina M de Oliveira",
+      "status": "completed"
+    },
+    {
+      "id": "3",
+      "date": "08 de agosto de 2025",
+      "title": "Receita manipulados",
+      "author": "Sheyla Cristina M de Oliveira",
+      "status": "completed"
+    }
+  ],
+  "procedures": [
+    {
+      "dateLabel": "08 de agosto de 2025",
+      "title": "Receita manipulados",
+      "status": "scheduled"
+    },
+    {
+      "dateLabel": "08 de agosto de 2025",
+      "title": "Receita manipulados",
+      "status": "cancelled"
+    },
+    {
+      "dateLabel": "08 de agosto de 2025",
+      "title": "Receita manipulados",
+      "status": "cancelled"
+    }
+  ]
+}

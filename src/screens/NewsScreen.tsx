@@ -1,51 +1,81 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
+import { layout } from '../theme/layout';
 import BottomNavbar from '../components/BottomNavbar';
 import { useRouter } from '../app/router/RouterProvider';
 import AppHeader from '../components/AppHeader';
 import Icon from '../design-system/Icon';
 import { Divider, RoundedCard } from '../components/Card';
 import { LinearGradient } from 'expo-linear-gradient';
+import { loadUserData } from '../mock';
+import { useNewsRepository } from '../providers/NewsRepositoryProvider';
+import type { NewsItem } from '../domain/news/types';
 
 export default function NewsScreen() {
   const { navigate, goBack } = useRouter();
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const userData = loadUserData();
+  const newsRepo = useNewsRepository();
+
+  useEffect(() => {
+    loadNewsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const loadNewsData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await newsRepo.getNewsList();
+      setNewsItems(data);
+    } catch (err) {
+      setError('Falha ao carregar notícias');
+      console.error('Error loading news:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const toggleCard = (cardIndex: number) => {
     setExpandedCard(expandedCard === cardIndex ? null : cardIndex);
   };
 
-  const cardContents = [
-    {
-      title: 'Novidade na Equalize: Efeito Preenchimento Injetável',
-      subtitle: 'A agenda está aberta para novo tratamento!',
-      content:
-        'Os preenchimentos injetáveis são uma excelente opção para quem busca rejuvenescimento facial de forma não cirúrgica. Este procedimento utiliza substâncias como ácido hialurônico para preencher rugas, sulcos e restaurar o volume perdido com o tempo. O resultado é imediato e natural, proporcionando uma aparência mais jovem e revitalizada. Na Equalize, utilizamos produtos de alta qualidade e técnicas avançadas para garantir os melhores resultados com total segurança.',
-    },
-    {
-      title: 'Chegou nova onda de calor, como proceder',
-      subtitle: 'Confira aqui 10 dicas de cuidados com seus procedimentos',
-      content:
-        'Durante períodos de alta temperatura, é fundamental redobrar os cuidados com a pele, especialmente após procedimentos estéticos. O calor excessivo pode causar irritações, inflamações e comprometer a cicatrização. Mantenha a área tratada sempre hidratada, evite exposição solar direta, use protetor solar com FPS alto e siga rigorosamente as orientações pós-procedimento. Em caso de qualquer alteração ou desconforto, entre em contato imediatamente com nossa equipe.',
-    },
-    {
-      title: 'Novos tratamentos disponíveis',
-      subtitle: 'Conheça as últimas novidades em procedimentos estéticos',
-      content:
-        'A Equalize está sempre se atualizando com as mais modernas técnicas e tecnologias do mercado estético. Nossos novos tratamentos incluem laser de última geração para rejuvenescimento, microagulhamento com drug delivery para maior penetração de ativos, e protocolos personalizados de skincare. Cada procedimento é desenvolvido especificamente para as necessidades individuais de cada paciente, garantindo resultados excepcionais e duradouros.',
-    },
-  ];
+  // Featured article - primeiro item do array
+  const featuredArticle = newsItems[0];
+  
+  // Additional news cards - demais itens
+  const additionalNews = newsItems.slice(1);
+
+  if (loading) {
+    return (
+      <View style={[styles.container, styles.centerContent]}>
+        <ActivityIndicator size="large" color={colors.textPrimary} />
+      </View>
+    );
+  }
+
+  if (error || !featuredArticle) {
+    return (
+      <View style={[styles.container, styles.centerContent]}>
+        <Text style={styles.errorText}>{error || 'Nenhuma notícia disponível'}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <AppHeader
-        greeting="Olá,"
-        name="Usuário!"
+        greeting={userData.greeting}
+        name={userData.name}
+        unreadCount={userData.unreadCount}
         onPressMessages={() => navigate('Messages')}
         onPressProfile={() => navigate('Account')}
-        includeSpacer={true}
+        includeSpacer={false}
       />
 
       <ScrollView contentContainerStyle={[styles.content, { paddingBottom: 140 }]}>
@@ -62,9 +92,7 @@ export default function NewsScreen() {
         <View style={styles.imageContainer}>
           <RoundedCard style={styles.newsCard}>
             <Image
-              source={{
-                uri: 'https://images.unsplash.com/photo-1560807707-8cc77767d783?w=1200&q=60&auto=format&fit=crop',
-              }}
+              source={{ uri: featuredArticle.imageUrl }}
               resizeMode="cover"
               style={styles.newsImage}
             />
@@ -75,60 +103,32 @@ export default function NewsScreen() {
               style={styles.gradient}
             />
             <View style={styles.overlay}>
-              <Text style={styles.newsTitle}>Chegou nova onda de calor, como proceder</Text>
-              <Text style={styles.newsSubtitle}>
-                Confira aqui 10 dicas de cuidados com seus procedimentos
-              </Text>
+              <Text style={styles.newsTitle}>{featuredArticle.title}</Text>
+              <Text style={styles.newsSubtitle}>{featuredArticle.subtitle}</Text>
             </View>
           </RoundedCard>
         </View>
 
         {/* Conteúdo da notícia */}
         <View style={styles.articleContent}>
-          <Text style={styles.articleTitle}>Chegou nova onda de calor, como proceder</Text>
-          <Text style={styles.articleDate}>01 de agosto de 2025</Text>
+          <Text style={styles.articleTitle}>{featuredArticle.title}</Text>
+          <Text style={styles.articleDate}>{featuredArticle.date}</Text>
 
-          <Text style={styles.articleText}>
-            Em dias muito quentes, a pele precisa de cuidados especiais para se manter saudável e protegida. A
-            exposição prolongada ao sol pode causar queimaduras, envelhecimento precoce e até aumento o risco
-            de câncer de pele. Por isso, o uso diário de protetor solar é essencial, mesmo em dias nublados.
-            Opte! é escolher um produto com fator de proteção (FPS) adequado ao seu tipo de pele e
-            reaplique-lo cada duas horas, especialmente após entrar na água ou transpirar.
-          </Text>
-
-          <Text style={styles.articleText}>
-            Além do protetor solar, é importante manter a pele bem hidratada. O calor excessivo e a exposição
-            ao sol podem ressecar a pele, deixando-a áspera e sensível. Beba bastante água ao longo do dia
-            ajuda a manter a hidratação de dentro para fora. Já no cuidado externo, o uso de cremes e loções
-            hidratantes leves, de preferência a base de água, pode ajudar a evitar o ressecamento e a
-            descamação.
-          </Text>
-
-          <Text style={styles.articleText}>
-            Outro ponto importante é evitar a exposição solar nos horários de maior intensidade, geralmente
-            entre 10h e 16h. Nesse período, a radiação ultravioleta é mais forte e pode causar danos maiores à
-            pele. Sempre que possível, busque locais com sombra e use acessórios como chapéus, bonés e óculos
-            de sol com proteção UV. Roupas de manga compridas e tecidos com proteção solar também são aliadas.
-          </Text>
-
-          <Text style={styles.articleText}>
-            Por fim, é fundamental observar a pele regularmente e ficar atento a qualquer alteração, como
-            manchas, pintas ou feridas que não cicatrizam. Em caso de dúvida, o ideal é consultar um
-            dermatologista. Cuidar da pele nos dias quentes é mais do que uma questão estética — é uma atitude
-            de saúde e prevenção que deve fazer parte da rotina de todos.
-          </Text>
+          {featuredArticle.content.split('\n\n').map((paragraph, index) => (
+            <Text key={index} style={styles.articleText}>
+              {paragraph}
+            </Text>
+          ))}
         </View>
 
         {/* Cards de notícias adicionais */}
         <View style={styles.newsCardsSection}>
-          {cardContents.map((card, index) => (
-            <View key={index}>
+          {additionalNews.map((newsItem, index) => (
+            <View key={newsItem.id}>
               <TouchableOpacity onPress={() => toggleCard(index)} activeOpacity={0.8}>
                 <RoundedCard style={styles.newsCard}>
                   <Image
-                    source={{
-                      uri: 'https://images.unsplash.com/photo-1560807707-8cc77767d783?w=1200&q=60&auto=format&fit=crop',
-                    }}
+                    source={{ uri: newsItem.imageUrl }}
                     style={styles.newsCardImage}
                     resizeMode="cover"
                   />
@@ -139,17 +139,17 @@ export default function NewsScreen() {
                     style={styles.newsCardGradient}
                   />
                   <View style={styles.newsCardOverlay}>
-                    <Text style={styles.newsCardTitle}>{card.title}</Text>
-                    <Text style={styles.newsCardSubtitle}>{card.subtitle}</Text>
+                    <Text style={styles.newsCardTitle}>{newsItem.title}</Text>
+                    <Text style={styles.newsCardSubtitle}>{newsItem.subtitle}</Text>
                   </View>
                 </RoundedCard>
               </TouchableOpacity>
 
               {expandedCard === index && (
                 <View style={styles.expandedContent}>
-                  <Text style={styles.expandedTitle}>{card.title}</Text>
-                  <Text style={styles.expandedDate}>05 de outubro de 2025</Text>
-                  <Text style={styles.expandedText}>{card.content}</Text>
+                  <Text style={styles.expandedTitle}>{newsItem.title}</Text>
+                  <Text style={styles.expandedDate}>{newsItem.date}</Text>
+                  <Text style={styles.expandedText}>{newsItem.content}</Text>
                 </View>
               )}
             </View>
@@ -199,19 +199,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
+  centerContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorText: {
+    color: colors.textMuted,
+    fontSize: 16,
+    textAlign: 'center',
+  },
   content: {
-    padding: 20,
-    paddingTop: 16,
+    padding: 20
   },
   titleSection: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 24,
-    gap: 8,
+    gap: 8
   },
   sectionTitle: {
     color: colors.textPrimary,
-    fontSize: 20,
+    fontSize: layout.sectionTitleFontSize,
     fontWeight: '600',
   },
   imageContainer: {

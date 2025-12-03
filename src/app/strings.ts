@@ -6,7 +6,7 @@ export const strings = {
   newsForYou: 'Novidades para você!',
   results: 'Resultados',
   errorLoading: 'Falha ao carregar dados',
-  home: 'Página Inicial',
+  home: 'Página inicial',
   identity: 'Identidade',
   care: 'Cuidados',
   regeneration: 'Regeneração',

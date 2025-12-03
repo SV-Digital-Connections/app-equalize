@@ -9,7 +9,9 @@ export type RouteName =
   | 'Maintenance'
   | 'Trail'
   | 'News'
-  | 'Results';
+  | 'Results'
+  | 'NextSteps'
+  | 'Profile';
 
 export type Navigate = (to: RouteName) => void;
 export type GoBack = () => void;

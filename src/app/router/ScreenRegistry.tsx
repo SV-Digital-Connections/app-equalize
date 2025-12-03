@@ -12,6 +12,8 @@ import MaintenanceScreen from '../../screens/MaintenanceScreen';
 import TrailScreen from '../../screens/TrailScreen';
 import NewsScreen from '../../screens/NewsScreen';
 import ResultsScreen from '../../screens/ResultsScreen';
+import NextStepsScreen from '../../screens/NextStepsScreen';
+import ProfileScreen from '../../screens/ProfileScreen';
 
 const screens: Record<RouteName, React.ComponentType> = {
   Login: () => {
@@ -28,6 +30,8 @@ const screens: Record<RouteName, React.ComponentType> = {
   Trail: TrailScreen,
   News: NewsScreen,
   Results: ResultsScreen,
+  NextSteps: NextStepsScreen,
+  Profile: ProfileScreen,
 };
 
 export default function ScreenRegistry() {

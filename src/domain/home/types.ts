@@ -1,6 +1,16 @@
+/**
+ * Home Domain Types
+ * Types related to the home screen data structure
+ */
+
 export type UpcomingProcedure = {
   dateLabel: string;
   name: string;
+};
+
+export type Hero = {
+  imageUri: string;
+  videoUri: string;
 };
 
 export type NewsItem = {
@@ -10,8 +20,11 @@ export type NewsItem = {
 };
 
 export type ResultItem = {
+  id: string;
   imageUrl: string;
-  dateLabel?: string;
+  title: string;
+  date: string;
+  category: string;
 };
 
 export type MessageItem = {
@@ -30,6 +43,7 @@ export type ProcedureItem = {
 
 export type HomeData = {
   upcoming: UpcomingProcedure;
+  hero: Hero;
   news: NewsItem[];
   results: ResultItem[];
   unreadCount: number;

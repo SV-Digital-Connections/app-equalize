@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Chegou nova onda de calor, como proceder",
+    "preview": "As altas temperaturas registradas neste verão têm causado impactos diretos na saúde da pele...",
+    "dateLabel": "01 de agosto de 2025",
+    "read": false
+  },
+  {
+    "id": "2",
+    "title": "Monica, seu procedimento é semana que vem!",
+    "preview": "A primavera é uma estação de renovação, e sua pele merece acompanhar esse ciclo...",
+    "dateLabel": "01 de agosto de 2025",
+    "read": false
+  },
+  {
+    "id": "3",
+    "title": "Skinboosters com ácido hialurônico são destaque",
+    "preview": "Uma das grandes inovações deste ano são os skinboosters com ácido hialurônico de liberação prolongada...",
+    "dateLabel": "01 de agosto de 2025",
+    "read": false
+  },
+  {
+    "id": "4",
+    "title": "Autoestima em alta: renove sua pele",
+    "preview": "Em dias muito quentes, a pele precisa de cuidados especiais para se manter saudável...",
+    "dateLabel": "01 de agosto de 2025",
+    "read": true
+  },
+  {
+    "id": "5",
+    "title": "Chegou nova onda de calor, como proceder",
+    "preview": "Em dias muito quentes, a pele precisa de cuidados especiais para se manter saudável...",
+    "dateLabel": "01 de agosto de 2025",
+    "read": true
+  }
+]

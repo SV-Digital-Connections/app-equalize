@@ -40,16 +40,14 @@ const styles = StyleSheet.create({
   imageWrapper: {
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: colors.headerBackground, // Verde musgo igual ao header
-    padding: 0,
+    borderColor: colors.headerBackground,
+    overflow: 'hidden',
   },
   container: {
     borderRadius: 12,
     overflow: 'hidden',
     backgroundColor: colors.surfaceAlt,
-    borderWidth: 1,
-    borderColor: colors.cardOutline,
   },
   image: { width: '100%', height: '100%' },
-  date: { color: colors.textMuted, fontSize: 10, marginTop: 6 },
+  date: { color: colors.textSecondary, fontSize: 10, marginTop: 6 },
 });

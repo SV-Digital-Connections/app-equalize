@@ -1,0 +1,69 @@
+{
+  "subtitle": "Sua trilha no Equalize",
+  "mainText": "A trilha Equalize orienta e informa você. Ali você identifica quais são os melhores tratamentos de acordo com a identidade da sua pele. Ao acessá-la você consegue saber a qualquer momento quais procedimentos você realizou, quando e o que foram os resultados alcançados. Dessa forma, é possível acompanhar evolutivamente as características da sua identidade ao longo do tempo e a ação dos tratamentos na prevenção, regeneração, manutenção e recuperação da saúde da sua pele e de características físicas anatômicas que interferem na sua aparência. A sua Trilha é uma forma segura para você organizar os cuidados com a sua pele - tanto em relação ao tempo quanto ao investimento necessário. Tudo na sua mão, ao seu alcance, com o seu conhecimento.",
+  "trailItems": [
+    {
+      "id": 1,
+      "date": "17 de setembro de 2025",
+      "title": "Ultraformer MPT",
+      "category": "Regeneração",
+      "icon": "auto-fix",
+      "status": "calendar",
+      "hasDownload": true
+    },
+    {
+      "id": 2,
+      "date": "17 de julho de 2025",
+      "title": "Rever Programação",
+      "category": "Checkups",
+      "icon": "clipboard-pulse-outline",
+      "status": "check",
+      "hasDownload": true
+    },
+    {
+      "id": 3,
+      "date": "08 de maio de 2025",
+      "title": "Receita manipulados",
+      "category": "Cuidados",
+      "icon": "molecule",
+      "status": "check",
+      "hasDownload": true
+    },
+    {
+      "id": 4,
+      "date": "10 de março de 2025",
+      "title": "Hydrafacial -30 Minutos",
+      "category": "Regeneração",
+      "icon": "auto-fix",
+      "status": "check",
+      "hasDownload": true
+    },
+    {
+      "id": 5,
+      "date": "27 de fevereiro de 2025",
+      "title": "Ellansé M",
+      "category": "Manutenção",
+      "icon": "cog",
+      "status": "close",
+      "hasDownload": true
+    },
+    {
+      "id": 6,
+      "date": "27 de fevereiro de 2025",
+      "title": "Acompanhamento",
+      "category": "Checkups",
+      "icon": "clipboard-pulse-outline",
+      "status": "check",
+      "hasDownload": true
+    },
+    {
+      "id": 7,
+      "date": "20 de janeiro de 2025",
+      "title": "Acompanhamento",
+      "category": "Checkups",
+      "icon": "clipboard-pulse-outline",
+      "status": "check",
+      "hasDownload": true
+    }
+  ]
+}

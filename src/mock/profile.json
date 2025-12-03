@@ -1,0 +1,68 @@
+[
+  {
+    "section": "personal",
+    "label": "Informações pessoais",
+    "options": [
+      {
+        "id": "name",
+        "icon": "account-outline",
+        "label": "Nome completo",
+        "value": "Monica Silva"
+      },
+      {
+        "id": "email",
+        "icon": "email-outline",
+        "label": "E-mail",
+        "value": "monica.silva@email.com"
+      },
+      {
+        "id": "phone",
+        "icon": "phone-outline",
+        "label": "Telefone",
+        "value": "+55 (11) 98765-4321"
+      },
+      {
+        "id": "birthdate",
+        "icon": "calendar-outline",
+        "label": "Data de nascimento",
+        "value": "15 de março de 1985"
+      },
+      {
+        "id": "address",
+        "icon": "map-marker-outline",
+        "label": "Endereço",
+        "value": "São Paulo, SP"
+      }
+    ]
+  },
+  {
+    "section": "settings",
+    "label": "Configurações",
+    "options": [
+      {
+        "id": "notifications",
+        "icon": "bell-outline",
+        "label": "Notificações",
+        "value": ""
+      },
+      {
+        "id": "privacy",
+        "icon": "shield-check-outline",
+        "label": "Privacidade",
+        "value": ""
+      },
+      {
+        "id": "help",
+        "icon": "help-circle-outline",
+        "label": "Ajuda e suporte",
+        "value": ""
+      },
+      {
+        "id": "about",
+        "icon": "information-outline",
+        "label": "Sobre o aplicativo",
+        "value": ""
+      }
+    ]
+  }
+]

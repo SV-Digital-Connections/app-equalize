@@ -1,0 +1,43 @@
+{
+  "subtitle": "Tratamentos para a manutenção da vitalidade da sua pele",
+  "mainText": "Os tratamentos de manutenção são procedimentos e cuidados contínuos que ajudam a preservar a saúde, o vigor e a uniformidade da pele ao longo do tempo. Eles são indicados para prevenir os sinais de flacidez, contornar a obesidade ou ressecamento, minimizar manchas e manter a pele sempre bonita e bem cuidada. São tratamentos indicados para prolongar os resultados já alcançados e não deixar que os sinais que antes incomodavam retornem. Principais Tratamentos de Manutenção: 1. Limpeza de Pele Profunda - Remove impurezas, cravos e células mortas, prevenindo acne e melhora a absorção de ativos. 2. Peelings Superficiais - Estimulam a renovação celular, clareiam manchas leves e melhoram a textura da pele. 3. Laser e Luz Pulsada - Tratam manchas, vasinhos, estimulam colágeno e ajudam no controle da obesidade. 4. Skinbooster e Bioestimuladores - Hidratação profunda e estímulo de colágeno para melhorar a firmeza e viço da pele. 5. Microagulhamento - Estimula colágeno, melhora cicatrizes e textura da pele. 6. Toxina Botulínica (Botox®) Preventivo - Mantém a pele lisa e previne rugas profundas. 7. Preenchimentos Leves - Para reposição sutil de volume e contorno facial. Além dos procedimentos dermatológicos, o uso diário de protetor solar, antioxidantes, hidratantes adequados e uma alimentação equilibrada são essenciais para manter os resultados.",
+  "proceduresTitle": "Procedimentos / Ações",
+  "procedures": [
+    {
+      "id": "1",
+      "dateLabel": "08 de agosto de 2025",
+      "title": "Volnewmer",
+      "status": "scheduled"
+    },
+    {
+      "id": "2",
+      "dateLabel": "17 de setembro de 2025",
+      "title": "Hydrafacial -30 Minutos",
+      "status": "scheduled"
+    },
+    {
+      "id": "3",
+      "dateLabel": "15 de setembro de 2025",
+      "title": "MMP Couro Cabeludo",
+      "status": "scheduled"
+    },
+    {
+      "id": "4",
+      "dateLabel": "15 de julho de 2025",
+      "title": "Hydrafacial -30 Minutos",
+      "status": "done"
+    },
+    {
+      "id": "5",
+      "dateLabel": "29 de maio de 2025",
+      "title": "MMP Couro Cabeludo",
+      "status": "done"
+    },
+    {
+      "id": "6",
+      "dateLabel": "10 de fevereiro de 2025",
+      "title": "Discovery Pico",
+      "status": "done"
+    }
+  ]
+}

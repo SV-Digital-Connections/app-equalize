@@ -44,10 +44,15 @@ export default function PromoBanner({ onPress }: Props) {
 }
 
 const styles = StyleSheet.create({
-  card: { borderRadius: 12, overflow: 'hidden' },
+  card: {
+    borderRadius: 12,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: colors.headerBackground,
+  },
   image: { width: '100%', height: 140 },
   gradient: { position: 'absolute', left: 0, right: 0, top: 0, height: 80 },
   overlay: { position: 'absolute', left: 12, right: 12, bottom: 12 },
-  title: { color: colors.textPrimary, fontSize: 14, fontWeight: '600' },
-  subtitle: { color: colors.textMuted, marginTop: 4 },
+  title: { color: colors.textSecondary, fontSize: 14, fontWeight: '600' },
+  subtitle: { color: colors.textSecondary, marginTop: 4, opacity: 0.8 },
 });

@@ -8,10 +8,20 @@ type Props = {
   dateLabel?: string;
   name?: string;
   onMeasured?: (h: number) => void;
+  onPress?: () => void;
+  scrollY?: number;
 };
 
-export default function NextProcedureFloat({ headerHeight, dateLabel, name, onMeasured }: Props) {
+export default function NextProcedureFloat({ headerHeight, dateLabel, name, onMeasured, onPress, scrollY = 0 }: Props) {
   const floatTop = React.useMemo(() => headerHeight, [headerHeight]);
+  const backgroundOpacity = React.useMemo(() => {
+    const threshold = 50;
+    const maxOpacity = 0.85;
+    if (scrollY <= threshold) return 0;
+    const opacity = Math.min((scrollY - threshold) / 200, maxOpacity);
+    return opacity;
+  }, [scrollY]);
+
   return (
     <View
       style={{
@@ -20,7 +30,7 @@ export default function NextProcedureFloat({ headerHeight, dateLabel, name, onMe
         right: 0,
         top: floatTop,
         borderRadius: layout.floatingCardRadius,
-        backgroundColor: 'transparent',
+        backgroundColor: `rgba(0, 0, 0, ${backgroundOpacity})`,
         borderWidth: 0,
         overflow: 'visible',
         paddingBottom: 0,
@@ -29,7 +39,7 @@ export default function NextProcedureFloat({ headerHeight, dateLabel, name, onMe
       }}
       onLayout={(e) => onMeasured?.(e.nativeEvent.layout.height)}
     >
-      <NextProcedureSection dateLabel={dateLabel} name={name} />
+      <NextProcedureSection dateLabel={dateLabel} name={name} onPress={onPress} />
     </View>
   );
 }

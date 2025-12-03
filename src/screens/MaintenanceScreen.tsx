@@ -3,19 +3,28 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
+import { layout } from '../theme/layout';
 import BottomNavbar from '../components/BottomNavbar';
 import { useRouter } from '../app/router/RouterProvider';
 import Icon from '../design-system/Icon';
 import AppHeader from '../components/AppHeader';
+import { loadMaintenanceData, loadUserData } from '../mock';
 
 export default function MaintenanceScreen() {
   const { navigate, goBack } = useRouter();
+  const maintenanceData = loadMaintenanceData();
+  const userData = loadUserData();
+
+  const getIconByStatus = (status: string) => {
+    return status === 'done' ? 'check-circle' : 'calendar-month';
+  };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <AppHeader
-        greeting="Olá,"
-        name="Usuário!"
+        greeting={userData.greeting}
+        name={userData.name}
+        unreadCount={userData.unreadCount}
         onPressMessages={() => navigate('Messages')}
         onPressProfile={() => navigate('Account')}
         includeSpacer={false}
@@ -24,104 +33,35 @@ export default function MaintenanceScreen() {
       <ScrollView contentContainerStyle={styles.content}>
         {/* Título da seção */}
         <View style={styles.titleSection}>
-          <Icon name="cog" size={24} color={colors.textPrimary} />
+          <Icon name="account-cog-outline" size={24} color={colors.textSecondary} />
           <Text style={styles.sectionTitle}>Manutenção</Text>
         </View>
 
         {/* Subtítulo */}
-        <Text style={styles.subtitle}>Tratamentos para a manutenção da vitalidade da sua pele</Text>
+        <Text style={styles.subtitle}>{maintenanceData.subtitle}</Text>
 
         {/* Texto principal */}
-        <Text style={styles.mainText}>
-          Os tratamentos de manutenção são procedimentos e cuidados contínuos que ajudam a preservar a saúde,
-          o vigor e a uniformidade da pele ao longo do tempo. Eles são indicados para prevenir os sinais de
-          flacidez, contornar a obesidade ou ressecamento, minimizar manchas e manter a pele sempre bonita e
-          bem cuidada. São tratamentos indicados para prolongar os resultados já alcançados e não deixar que
-          os sinais que antes incomodavam retornem. Principais Tratamentos de Manutenção: 1. Limpeza de Pele
-          Profunda - Remove impurezas, cravos e células mortas, prevenindo acne e melhora a absorção de
-          ativos. 2. Peelings Superficiais - Estimulam a renovação celular, clareiam manchas leves e melhoram
-          a textura da pele. 3. Laser e Luz Pulsada - Tratam manchas, vasinhos, estimulam colágeno e ajudam no
-          controle da obesidade. 4. Skinbooster e Bioestimuladores - Hidratação profunda e estímulo de
-          colágeno para melhorar a firmeza e viço da pele. 5. Microagulhamento - Estimula colágeno, melhora
-          cicatrizes e textura da pele. 6. Toxina Botulínica (Botox®) Preventivo - Mantém a pele lisa e
-          previne rugas profundas. 7. Preenchimentos Leves - Para reposição sutil de volume e contorno facial.
-          Além dos procedimentos dermatológicos, o uso diário de protetor solar, antioxidantes, hidratantes
-          adequados e uma alimentação equilibrada são essenciais para manter os resultados.
-        </Text>
+        <Text style={styles.mainText}>{maintenanceData.mainText}</Text>
 
         {/* Seção de procedimentos */}
-        <Text style={styles.proceduresTitle}>Procedimentos / Ações</Text>
+        <Text style={styles.proceduresTitle}>{maintenanceData.proceduresTitle}</Text>
 
         {/* Timeline */}
         <View style={styles.timelineContainer}>
           {/* Linha vertical da timeline */}
           <View style={styles.timelineLine} />
 
-          {/* Item 1 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="calendar-outline" size={20} color={colors.textMuted} />
+          {maintenanceData.procedures.map((procedure) => (
+            <View key={procedure.id} style={styles.timelineItem}>
+              <View style={styles.timelineIconContainer}>
+                <Icon name={getIconByStatus(procedure.status)} size={28} color={colors.textSecondary} />
+              </View>
+              <View style={styles.timelineContent}>
+                <Text style={styles.timelineDate}>{procedure.dateLabel}</Text>
+                <Text style={styles.timelineTitle}>{procedure.title}</Text>
+              </View>
             </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>08 de agosto de 2025</Text>
-              <Text style={styles.timelineTitle}>Volnewmer</Text>
-            </View>
-          </View>
-
-          {/* Item 2 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="calendar-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>17 de setembro de 2025</Text>
-              <Text style={styles.timelineTitle}>Hydrafacial -30 Minutos</Text>
-            </View>
-          </View>
-
-          {/* Item 3 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="alert-circle-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>15 de setembro de 2025</Text>
-              <Text style={styles.timelineTitle}>MMP Couro Cabeludo</Text>
-            </View>
-          </View>
-
-          {/* Item 4 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="check-circle-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>15 de julho de 2025</Text>
-              <Text style={styles.timelineTitle}>Hydrafacial -30 Minutos</Text>
-            </View>
-          </View>
-
-          {/* Item 5 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="check-circle-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>29 de maio de 2025</Text>
-              <Text style={styles.timelineTitle}>MMP Couro Cabeludo</Text>
-            </View>
-          </View>
-
-          {/* Item 6 */}
-          <View style={styles.timelineItem}>
-            <View style={styles.timelineIconContainer}>
-              <Icon name="check-circle-outline" size={20} color={colors.textMuted} />
-            </View>
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineDate}>10 de fevereiro de 2025</Text>
-              <Text style={styles.timelineTitle}>Discovery Pico</Text>
-            </View>
-          </View>
+          ))}
         </View>
       </ScrollView>
 
@@ -168,35 +108,35 @@ const styles = StyleSheet.create({
   content: {
     padding: 20,
     paddingBottom: 140, // leave space for bottom navbar
-    paddingTop: 120,
+    paddingTop: 100,
   },
   titleSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 16,
     gap: 8,
   },
   sectionTitle: {
-    color: colors.textPrimary,
-    fontSize: 24,
+    color: colors.textSecondary,
+    fontSize: layout.sectionTitleFontSize,
     fontWeight: '700',
   },
   subtitle: {
-    color: colors.textPrimary,
-    fontSize: 18,
+    color: colors.textSecondary,
+    fontSize: layout.sectionTitleFontSize,
     fontWeight: '600',
-    marginBottom: 20,
+    marginBottom: 16,
     lineHeight: 24,
   },
   mainText: {
-    color: colors.textMuted,
+    color: colors.textSecondary,
     fontSize: 14,
     lineHeight: 22,
     textAlign: 'justify',
     marginBottom: 32,
   },
   proceduresTitle: {
-    color: colors.textPrimary,
+    color: colors.textSecondary,
     fontSize: 20,
     fontWeight: '700',
     marginBottom: 16,
@@ -208,12 +148,12 @@ const styles = StyleSheet.create({
   },
   timelineLine: {
     position: 'absolute',
-    left: 39,
-    top: 40,
+    left: 33,
+    top: 14,
     bottom: 20,
     width: 2,
-    backgroundColor: colors.textMuted,
-    opacity: 0.3,
+    backgroundColor: colors.textSecondary,
+    opacity: 0.4,
   },
   timelineItem: {
     flexDirection: 'row',
@@ -222,12 +162,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   timelineIconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.background,
-    borderWidth: 2,
-    borderColor: colors.textMuted,
+    width: 28,
+    height: 28,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,

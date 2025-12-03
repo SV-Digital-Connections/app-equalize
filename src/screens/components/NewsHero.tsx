@@ -18,7 +18,7 @@ export default function NewsHero({ onSeeMore, heroImageUri, heroVideoUri }: Prop
     heroImageUri ??
     'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=60&auto=format&fit=crop';
   return (
-    <>
+    <View style={styles.container}>
       <SectionHeader
         title={strings.newsForYou}
         style={{ paddingHorizontal: 0 }}
@@ -34,12 +34,15 @@ export default function NewsHero({ onSeeMore, heroImageUri, heroVideoUri }: Prop
       <View style={styles.heroWrapper}>
         <MediaHero uri={safeImage} videoUri={heroVideoUri} loop muted />
       </View>
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  action: { color: colors.textMuted },
+  container: {
+    marginTop: 20,
+  },
+  action: { color: colors.textSecondary },
   heroWrapper: {
     paddingHorizontal: 0,
     marginTop: 12,

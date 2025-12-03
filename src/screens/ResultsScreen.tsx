@@ -10,10 +10,12 @@ import { easeNextLayout } from '../utils/animations';
 import Icon from '../design-system/Icon';
 import { ModalCard } from '../components/ModalCard';
 import { useResultsViewModel } from '../viewmodels/useResultsViewModel';
+import { loadUserData } from '../mock';
 
 export default function ResultsScreen() {
   const { navigate, goBack } = useRouter();
   const { results } = useResultsViewModel();
+  const userData = loadUserData();
   const [headerH, setHeaderH] = React.useState(0);
   const [floatH, setFloatH] = React.useState(0);
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -36,8 +38,9 @@ export default function ResultsScreen() {
   return (
     <View style={styles.container}>
       <AppHeader
-        greeting="Olá,"
-        name="Usuário!"
+        greeting={userData.greeting}
+        name={userData.name}
+        unreadCount={userData.unreadCount}
         onPressMessages={() => navigate('Messages')}
         onPressProfile={() => navigate('Account')}
         onLayout={(e) => {

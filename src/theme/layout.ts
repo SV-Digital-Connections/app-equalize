@@ -1,5 +1,7 @@
 export const layout = {
   screenPadding: 16,
+  sectionTitleTopPadding: 80,
+  sectionTitleFontSize: 18,
   headerTopPadding: 32,
   headerBottomPadding: 18,
   floatingCardRadius: 18,

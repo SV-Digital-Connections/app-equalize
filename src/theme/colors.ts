@@ -9,6 +9,7 @@ export const colors = {
 
   // Text
   textPrimary: '#EDEDED',
+  textSecondary: '#B7E2DA',
   textMuted: '#B9B9B9',
   placeholder: '#6F6E6E',
 

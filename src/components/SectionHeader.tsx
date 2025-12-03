@@ -35,5 +35,5 @@ const styles = StyleSheet.create({
   },
   containerDense: { paddingHorizontal: spacing.md },
   left: { flexDirection: 'row', alignItems: 'center' },
-  title: { color: colors.textPrimary, marginLeft: spacing.sm, fontWeight: '700', letterSpacing: 0.3 },
+  title: { color: colors.textSecondary, marginLeft: spacing.sm, fontWeight: '700', letterSpacing: 0.3 },
 });
