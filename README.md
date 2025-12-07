@@ -44,6 +44,68 @@ A production-grade Expo app with a modular design system, Clean Architecture (MV
 - React Native Paper (MD3 theme) is integrated and themed via `src/theme/paperTheme.ts`.
 - Layout animations opt-in is enabled in `src/utils/animations.ts` and wired in `App.tsx`.
 
+### App Center Configuration
+
+This project uses Microsoft App Center for analytics and crash reporting.
+
+#### Setup Steps
+
+1. **Get App Center App Secrets:**
+   - Sign in to [App Center](https://appcenter.ms)
+   - Create or select your app for iOS and Android
+   - Navigate to Settings and copy each App Secret
+
+2. **Configure Secrets:**
+   - Open `appcenter-config.json` at project root
+   - Replace placeholder values with your actual App Secrets:
+     ```json
+     {
+       "app_secret": {
+         "ios": "your-ios-app-secret-here",
+         "android": "your-android-app-secret-here"
+       }
+     }
+     ```
+
+3. **Update Service Configuration:**
+   - Open `src/services/appCenter.ts`
+   - Update `APP_CENTER_CONFIG` with your App Secrets
+
+#### Usage
+
+App Center is automatically initialized on app startup. Use the provided functions to track events and errors:
+
+```typescript
+import { trackEvent, trackError } from './src/services/appCenter';
+
+// Track custom events
+trackEvent('user_login', { method: 'email' });
+trackEvent('screen_view', { screen: 'Home' });
+
+// Track errors
+try {
+  // your code
+} catch (error) {
+  trackError(error as Error, { context: 'user_action' });
+}
+```
+
+#### Privacy Controls
+
+Users can opt-in/opt-out of analytics:
+
+```typescript
+import { setAnalyticsEnabled, isAnalyticsEnabled } from './src/services/appCenter';
+
+// Check status
+const enabled = await isAnalyticsEnabled();
+
+// Toggle analytics
+await setAnalyticsEnabled(false);
+```
+
+**Note:** If App Secrets are not configured, App Center will skip initialization gracefully.
+
 ## Running with device/simulator
 
 - Android: Ensure Android emulator is running or connect a device with USB debugging.

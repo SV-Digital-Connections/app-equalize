@@ -5,10 +5,12 @@ import AppProviders from './src/app/AppProviders';
 import { RouterProvider } from './src/app/router/RouterProvider';
 import ScreenRegistry from './src/app/router/ScreenRegistry';
 import { enableLayoutAnimations } from './src/utils/animations';
+import { initializeAppCenter } from './src/services/appCenter';
 
 export default function App() {
   React.useEffect(() => {
     enableLayoutAnimations();
+    initializeAppCenter();
   }, []);
   return (
     <AppProviders>

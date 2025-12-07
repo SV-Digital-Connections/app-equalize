@@ -1,0 +1,6 @@
+{
+  "app_secret": {
+    "ios": "YOUR_IOS_APP_SECRET",
+    "android": "YOUR_ANDROID_APP_SECRET"
+  }
+}
