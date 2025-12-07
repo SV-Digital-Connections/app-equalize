@@ -1,4 +1,4 @@
-Ôªøimport React from 'react';
+import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, Button } from 'react-native-paper';
@@ -24,7 +24,7 @@ export default function TrailScreen() {
   };
 
   const downloadFile = () => {
-    // Fun√ß√£o para download do arquivo
+    // FunÁ„o para download do arquivo
 
     const { log } = require('../utils/log');
     log.info('Download arquivo');
@@ -56,19 +56,12 @@ export default function TrailScreen() {
       />
 
       <ScrollView contentContainerStyle={styles.content}>
-        {/* T√≠tulo da se√ß√£o */}
         <View style={styles.titleSection}>
           <Icon name="map-marker-path" size={24} color={colors.textSecondary} />
           <Text style={styles.sectionTitle}>Sua trilha</Text>
         </View>
-
-        {/* Subt√≠tulo */}
         <Text style={styles.subtitle}>{trailData.subtitle}</Text>
-
-        {/* Texto principal */}
         <Text style={styles.mainText}>{trailData.mainText}</Text>
-
-        {/* Trail Items */}
         <View style={styles.trailItemsContainer}>
           {trailItems.map((item) => (
             <TouchableOpacity
@@ -113,7 +106,7 @@ export default function TrailScreen() {
 
       <BottomNavbar
         items={[
-          { key: 'home', label: 'P√°gina Inicial', icon: 'home-outline', onPress: () => navigate('Main') },
+          { key: 'home', label: 'P·gina Inicial', icon: 'home-outline', onPress: () => navigate('Main') },
           {
             key: 'identity',
             label: 'Identidade',
@@ -123,13 +116,13 @@ export default function TrailScreen() {
           { key: 'care', label: 'Cuidados', icon: 'molecule', onPress: () => navigate('Care') },
           {
             key: 'regen',
-            label: 'Regenera√ß√£o',
+            label: 'RegeneraÁ„o',
             icon: 'arrow-collapse-vertical',
             onPress: () => navigate('Regeneration'),
           },
           {
             key: 'maint',
-            label: 'Manuten√ß√£o',
+            label: 'ManutenÁ„o',
             icon: 'account-cog-outline',
             onPress: () => navigate('Maintenance'),
           },

@@ -31,24 +31,14 @@ export default function CheckUps() {
       />
 
       <ScrollView contentContainerStyle={styles.content}>
-        {/* Título da seção */}
         <View style={styles.titleSection}>
           <Icon name="clipboard-pulse-outline" size={24} color={colors.textSecondary} />
           <Text style={styles.sectionTitle}>Checkups</Text>
         </View>
-
-        {/* Subtítulo */}
         <Text style={styles.subtitle}>{checkupsData.subtitle}</Text>
-
-        {/* Texto principal */}
         <Text style={styles.mainText}>{checkupsData.mainText}</Text>
-
-        {/* Seção de procedimentos */}
         <Text style={styles.proceduresTitle}>{checkupsData.proceduresTitle}</Text>
-
-        {/* Timeline */}
         <View style={styles.timelineContainer}>
-          {/* Linha vertical da timeline */}
           <View style={styles.timelineLine} />
 
           {checkupsData.procedures.map((procedure) => (

@@ -81,19 +81,15 @@ export default function MainScreen() {
 
         {loading && (
           <View style={{ paddingVertical: 16 }}>
-            {/* Skeleton do herói de mídia */}
             <Skeleton style={{ height: 220, borderRadius: 16 }} />
-            {/* Skeleton do título/seção resultados */}
             <View style={{ height: 12 }} />
             <Skeleton style={{ height: 18, width: 140, borderRadius: 4 }} />
-            {/* Skeleton das miniaturas do carrossel */}
             <View style={{ height: 12 }} />
             <View style={{ flexDirection: 'row', gap: 12 }}>
               <Skeleton style={{ width: 160, height: 213, borderRadius: 12 }} />
               <Skeleton style={{ width: 160, height: 213, borderRadius: 12 }} />
               <Skeleton style={{ width: 160, height: 213, borderRadius: 12 }} />
             </View>
-            {/* Skeleton das seções de procedimentos (três linhas) */}
             <View style={{ height: 16 }} />
             <Skeleton style={{ height: 18, width: 120, borderRadius: 4 }} />
             <View style={{ height: 8 }} />

@@ -10,17 +10,13 @@ import { colors } from '../theme/colors';
 const IdentityIcon = ({ color = colors.textSecondary }: { color?: string }) => (
   <View style={[styles.customIcon, { borderColor: color }]}>
     <View style={[styles.face, { borderColor: color }]}>
-      {/* Olhos */}
       <View style={styles.eyes}>
         <View style={[styles.eye, { backgroundColor: color }]} />
         <View style={[styles.eye, { backgroundColor: color }]} />
       </View>
-      {/* Sorriso */}
       <View style={[styles.smile, { borderColor: color }]} />
     </View>
-    {/* Cabelo */}
     <View style={[styles.hair, { borderColor: color }]} />
-    {/* Pontos decorativos */}
     <View style={styles.leftDots}>
       <View style={[styles.dot, { backgroundColor: color }]} />
       <View style={[styles.dot, { backgroundColor: color }]} />

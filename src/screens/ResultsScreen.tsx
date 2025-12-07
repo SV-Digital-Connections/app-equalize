@@ -49,8 +49,6 @@ export default function ResultsScreen() {
         }}
         includeSpacer={true}
       />
-
-      {/* Contêiner flutuante transparente - mesmo da MainScreen */}
       <View
         style={[styles.floatingCard, { top: floatTop }]}
         onLayout={(e) => {
@@ -69,8 +67,6 @@ export default function ResultsScreen() {
 
       <ScrollView contentContainerStyle={[styles.scroll, { paddingTop: 0 }]}>
         <View style={{ height: Math.max(0, spacerHeight - 130) }} />
-
-        {/* Galeria de Resultados */}
         <View style={styles.galleryContainer}>
           {images.map((uri, index) => (
             <TouchableOpacity key={index} style={styles.imageContainer} onPress={() => openModal(index)}>

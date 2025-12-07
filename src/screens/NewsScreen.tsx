@@ -23,32 +23,29 @@ export default function NewsScreen() {
   const newsRepo = useNewsRepository();
 
   useEffect(() => {
-    loadNewsData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const loadNewsData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await newsRepo.getNewsList();
+        setNewsItems(data);
+      } catch (err) {
+        setError('Falha ao carregar notícias');
+        console.error('Error loading news:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const loadNewsData = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await newsRepo.getNewsList();
-      setNewsItems(data);
-    } catch (err) {
-      setError('Falha ao carregar notícias');
-      console.error('Error loading news:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    loadNewsData();
+  }, [newsRepo]);
 
   const toggleCard = (cardIndex: number) => {
     setExpandedCard(expandedCard === cardIndex ? null : cardIndex);
   };
 
-  // Featured article - primeiro item do array
   const featuredArticle = newsItems[0];
-  
-  // Additional news cards - demais itens
+
   const additionalNews = newsItems.slice(1);
 
   if (loading) {
@@ -79,16 +76,13 @@ export default function NewsScreen() {
       />
 
       <ScrollView contentContainerStyle={[styles.content, { paddingBottom: 140 }]}>
-        {/* Title Section */}
         <View style={styles.titleSection}>
           <Icon name="newspaper-variant-outline" size={24} color={colors.textPrimary} />
           <Text style={styles.sectionTitle}>Novidades</Text>
         </View>
 
-        {/* Linha divisória branca */}
         <Divider style={{ backgroundColor: '#FFFFFF' }} />
 
-        {/* Imagem com proporção maior */}
         <View style={styles.imageContainer}>
           <RoundedCard style={styles.newsCard}>
             <Image
@@ -109,7 +103,6 @@ export default function NewsScreen() {
           </RoundedCard>
         </View>
 
-        {/* Conteúdo da notícia */}
         <View style={styles.articleContent}>
           <Text style={styles.articleTitle}>{featuredArticle.title}</Text>
           <Text style={styles.articleDate}>{featuredArticle.date}</Text>
@@ -121,7 +114,6 @@ export default function NewsScreen() {
           ))}
         </View>
 
-        {/* Cards de notícias adicionais */}
         <View style={styles.newsCardsSection}>
           {additionalNews.map((newsItem, index) => (
             <View key={newsItem.id}>
@@ -155,8 +147,6 @@ export default function NewsScreen() {
             </View>
           ))}
         </View>
-
-        {/* Placeholder content - removido para dar espaço ao artigo */}
       </ScrollView>
 
       <BottomNavbar

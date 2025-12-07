@@ -27,7 +27,6 @@ export default function ProfileScreen() {
   const settingsOptions = profileSections.find((s) => s.section === 'settings')?.options || [];
 
   const handleOptionPress = (optionId: string) => {
-    // Implementar navegação ou ações específicas
     const { log } = require('../utils/log');
     log.info('Option pressed:', optionId);
   };
@@ -49,7 +48,6 @@ export default function ProfileScreen() {
           <Text style={styles.sectionTitle}>Meu Perfil</Text>
         </View>
 
-        {/* Profile Avatar */}
         <View style={styles.avatarSection}>
           <View style={styles.avatarContainer}>
             <Icon name="account-circle" size={80} color={colors.textSecondary} />
@@ -59,8 +57,6 @@ export default function ProfileScreen() {
             <Text style={styles.editButtonText}>Editar foto</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Personal Info Section */}
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>
             {profileSections.find((s) => s.section === 'personal')?.label}
@@ -82,8 +78,6 @@ export default function ProfileScreen() {
             </TouchableOpacity>
           ))}
         </View>
-
-        {/* Settings Section */}
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>
             {profileSections.find((s) => s.section === 'settings')?.label}
@@ -102,8 +96,6 @@ export default function ProfileScreen() {
             </TouchableOpacity>
           ))}
         </View>
-
-        {/* Logout Button */}
         <TouchableOpacity style={styles.logoutButton} onPress={() => navigate('Login')}>
           <Icon name="logout" size={24} color={colors.textSecondary} />
           <Text style={styles.logoutText}>Sair da conta</Text>

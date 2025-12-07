@@ -1,4 +1,5 @@
 import type { AuthCredentials, AuthResponse, AuthRepository } from '../../domain/auth/types';
+import { log } from '../../utils/log';
 
 /**
  * Remote Auth Repository
@@ -16,7 +17,7 @@ export class RemoteAuthRepository implements AuthRepository {
 
   async login(credentials: AuthCredentials): Promise<AuthResponse> {
     const url = `${this.baseUrl}/api/login`;
-    console.log('[RemoteAuthRepo] 🔐 Logging in:', credentials.email);
+    log.info('[RemoteAuthRepo] 🔐 Logging in:', credentials.email);
 
     try {
       const res = await fetch(url, {
@@ -28,28 +29,27 @@ export class RemoteAuthRepository implements AuthRepository {
         body: JSON.stringify(credentials),
       });
 
-      console.log('[RemoteAuthRepo] Response status:', res.status);
+      log.info('[RemoteAuthRepo] Response status:', res.status);
 
       if (!res.ok) {
         const errorText = await res.text();
-        console.log('[RemoteAuthRepo] ❌ Login failed:', errorText);
+        log.error('[RemoteAuthRepo] ❌ Login failed:', errorText);
         throw new Error(`Login failed: ${res.status} - ${errorText}`);
       }
 
       const json = (await res.json()) as AuthResponse;
-      console.log('[RemoteAuthRepo] 📦 Login response:', JSON.stringify(json, null, 2));
+      log.info('[RemoteAuthRepo] 📦 Login response:', JSON.stringify(json, null, 2));
 
-      // Check if API returned error in JSON (even with 200 status)
       if (json.status === 'error' || !json.token) {
         const errorMsg = json.message || 'Login failed';
-        console.log('[RemoteAuthRepo] ❌ Login failed:', errorMsg);
+        log.error('[RemoteAuthRepo] ❌ Login failed:', errorMsg);
         throw new Error(errorMsg);
       }
 
-      console.log('[RemoteAuthRepo] ✅ Login successful, token received');
+      log.info('[RemoteAuthRepo] ✅ Login successful, token received');
       return json;
     } catch (error) {
-      console.log('[RemoteAuthRepo] 💥 Login error:', error);
+      log.error('[RemoteAuthRepo] 💥 Login error:', error);
       throw error;
     }
   }
@@ -58,10 +58,10 @@ export class RemoteAuthRepository implements AuthRepository {
     const url = `${this.baseUrl}/api/logout`;
     const token = this.getToken();
 
-    console.log('[RemoteAuthRepo] 🚪 Logging out');
+    log.info('[RemoteAuthRepo] 🚪 Logging out');
 
     if (!token) {
-      console.log('[RemoteAuthRepo] ⚠️ No token found, skipping API call');
+      log.warn('[RemoteAuthRepo] ⚠️ No token found, skipping API call');
       return;
     }
 
@@ -74,15 +74,15 @@ export class RemoteAuthRepository implements AuthRepository {
         },
       });
 
-      console.log('[RemoteAuthRepo] Response status:', res.status);
+      log.info('[RemoteAuthRepo] Response status:', res.status);
 
       if (!res.ok) {
-        console.log('[RemoteAuthRepo] ⚠️ Logout API error (non-critical):', res.status);
+        log.warn('[RemoteAuthRepo] ⚠️ Logout API error (non-critical):', res.status);
       } else {
-        console.log('[RemoteAuthRepo] ✅ Logout successful');
+        log.info('[RemoteAuthRepo] ✅ Logout successful');
       }
     } catch (error) {
-      console.log('[RemoteAuthRepo] ⚠️ Logout error (non-critical):', error);
+      log.warn('[RemoteAuthRepo] ⚠️ Logout error (non-critical):', error);
     }
   }
 }

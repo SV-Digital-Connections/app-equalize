@@ -31,24 +31,14 @@ export default function MaintenanceScreen() {
       />
 
       <ScrollView contentContainerStyle={styles.content}>
-        {/* Título da seção */}
         <View style={styles.titleSection}>
           <Icon name="account-cog-outline" size={24} color={colors.textSecondary} />
           <Text style={styles.sectionTitle}>Manutenção</Text>
         </View>
-
-        {/* Subtítulo */}
         <Text style={styles.subtitle}>{maintenanceData.subtitle}</Text>
-
-        {/* Texto principal */}
         <Text style={styles.mainText}>{maintenanceData.mainText}</Text>
-
-        {/* Seção de procedimentos */}
         <Text style={styles.proceduresTitle}>{maintenanceData.proceduresTitle}</Text>
-
-        {/* Timeline */}
         <View style={styles.timelineContainer}>
-          {/* Linha vertical da timeline */}
           <View style={styles.timelineLine} />
 
           {maintenanceData.procedures.map((procedure) => (

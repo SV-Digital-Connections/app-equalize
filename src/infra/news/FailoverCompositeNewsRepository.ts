@@ -14,7 +14,6 @@ export class FailoverCompositeNewsRepository implements NewsRepository {
     console.log('[NewsRepo] Primary type:', this.primary.constructor.name);
     console.log('[NewsRepo] Primary has getNewsList?', typeof this.primary.getNewsList);
     try {
-      // try primary first
       const result = await this.primary.getNewsList();
       console.log('[NewsRepo] ✅ Success from primary, got', result.length, 'items');
       return result;
@@ -33,12 +32,10 @@ export class FailoverCompositeNewsRepository implements NewsRepository {
 
   async getNewsById(id: string): Promise<NewsItem> {
     try {
-      // try primary first
       return await this.primary.getNewsById(id);
     } catch (e) {
       const chosen = this.strategy.pick(this.primary, this.fallback, e);
       if (chosen === this.fallback || e instanceof CircuitOpenError) {
-        // log: falling back to mock
         return await this.fallback.getNewsById(id);
       }
       throw e;

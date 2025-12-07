@@ -25,7 +25,6 @@ export default function IdentityScreen() {
   const [activeImageIndex, setActiveImageIndex] = React.useState(0);
   const [activeTooltip, setActiveTooltip] = React.useState<string | null>(null);
 
-  // Load identity data from JSON
   const identityData = loadIdentityData();
   const userData = loadUserData();
 
@@ -87,7 +86,6 @@ export default function IdentityScreen() {
       />
 
       <ScrollView contentContainerStyle={[styles.content, { paddingBottom: 140 }]}>
-        {/* Identity Section */}
         <View style={styles.identitySection}>
           <View style={styles.titleSection}>
             <Icon name="account-circle-outline" size={24} color={colors.textSecondary} />
@@ -113,8 +111,6 @@ export default function IdentityScreen() {
                 <View style={styles.carouselItem}>
                   <View style={styles.photoFrame}>
                     <Image source={{ uri: item.uri }} style={styles.facePhoto} resizeMode="cover" />
-
-                    {/* Overlay dots for facial mapping - Only first photo has points */}
                     {item.id === '1' &&
                       identityData.facialPoints.map((point) => {
                         const pointLayout = facialPointPositions[point.id];
@@ -130,8 +126,6 @@ export default function IdentityScreen() {
                           </Pressable>
                         );
                       })}
-
-                    {/* Date overlay at bottom of image */}
                     <View style={styles.dateOverlay}>
                       <Text style={styles.dateOverlayText}>{item.date}</Text>
                     </View>
@@ -140,8 +134,6 @@ export default function IdentityScreen() {
               )}
             />
           </View>
-
-          {/* Tooltips renderizados fora do container da imagem */}
           {identityData.facialPoints.map((point) => {
             if (activeTooltip === point.id && activeImageIndex === 0) {
               const tooltipPos = getTooltipPosition(point.id);
@@ -157,8 +149,6 @@ export default function IdentityScreen() {
             }
             return null;
           })}
-
-          {/* Navigation dots */}
           <View style={styles.navigationDotsContainer}>
             <View style={styles.navigationDots}>
               {identityData.mainPhotos.map((_, index) => (
@@ -170,16 +160,12 @@ export default function IdentityScreen() {
             </View>
           </View>
         </View>
-
-        {/* Text Content Sections */}
         {identityData.questionsAndAnswers.map((qa) => (
           <View key={qa.id} style={styles.textSection}>
             <Text style={styles.questionTitle}>{qa.question}</Text>
             <Text style={styles.answerText}>{qa.answer}</Text>
           </View>
         ))}
-
-        {/* Photos Section */}
         <View style={styles.photosSection}>
           <Text style={styles.photosTitle}>Fotos</Text>
           <View style={styles.photosContainer}>
@@ -195,8 +181,6 @@ export default function IdentityScreen() {
             ))}
           </View>
         </View>
-
-        {/* 3D Section */}
         <View style={styles.photosSection}>
           <Text style={styles.photosTitle}>3D</Text>
           <View style={[styles.photosContainer, { marginTop: 8 }]}>

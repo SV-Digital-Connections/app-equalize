@@ -34,27 +34,15 @@ export default function RegenerationScreen() {
       />
 
       <ScrollView contentContainerStyle={styles.content}>
-        {/* Título da seção */}
         <View style={styles.titleSection}>
           <Icon name="arrow-collapse-vertical" size={24} color={colors.textSecondary} />
           <Text style={styles.sectionTitle}>Regeneração</Text>
         </View>
-
-        {/* Subtítulo */}
         <Text style={styles.subtitle}>{regenerationData.subtitle}</Text>
-
-        {/* Texto principal */}
         <Text style={styles.mainText}>{regenerationData.mainText}</Text>
-
-        {/* Seção de procedimentos */}
         <Text style={styles.proceduresTitle}>{regenerationData.proceduresTitle}</Text>
-
-        {/* Timeline */}
         <View style={styles.timelineContainer}>
-          {/* Linha vertical da timeline */}
           <View style={styles.timelineLine} />
-
-          {/* Timeline Items - Dynamic from JSON */}
           {regenerationData.procedures.map((procedure) => (
             <View key={procedure.id} style={styles.timelineItem}>
               <View style={styles.timelineIconContainer}>

@@ -63,7 +63,6 @@ export default function AppHeader({
           </View>
         </View>
         <View style={styles.headerActions}>
-          {/* share button */}
           <IconButton
             accessibilityLabel={strings.a11yShare}
             icon={(props) => <Icon name="share-variant" color={props.color} size={28} />}
@@ -97,8 +96,6 @@ export default function AppHeader({
           />
         </View>
       </SafeAreaView>
-
-      {/* Espaçador dinâmico que empurra o conteúdo para ficar abaixo do cabeçalho */}
       {includeSpacer && <View style={{ height: measuredHeight || DEFAULT_HEADER_SPACER_HEIGHT }} />}
     </>
   );

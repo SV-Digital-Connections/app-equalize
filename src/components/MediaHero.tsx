@@ -75,8 +75,6 @@ export default function MediaHero({ uri, videoUri, loop = true, muted = true }: 
           </View>
         </TouchableOpacity>
       </View>
-
-      {/* Texto "Veja sua evolução" na parte inferior - só aparece quando não está reproduzindo */}
       {!playing && (
         <View style={styles.bottomTextContainer}>
           <Text style={styles.bottomText}>{strings.mediaSeeProgress}</Text>

@@ -10,18 +10,13 @@ import { loadNews } from '../../mock';
  */
 export class MockNewsRepository implements NewsRepository {
   async getNewsList(): Promise<NewsItem[]> {
-    // Simulate network delay
     await new Promise((r) => setTimeout(r, 50));
-
-    // Load mock news data from JSON
     return loadNews();
   }
 
   async getNewsById(id: string): Promise<NewsItem> {
-    // Simulate network delay
     await new Promise((r) => setTimeout(r, 50));
 
-    // Find news item by id
     const newsList = loadNews();
     const newsItem = newsList.find((item) => item.id === id);
 

@@ -18,6 +18,7 @@ import trailData from './trail.json';
 import nextStepsData from './nextsteps.json';
 import identityData from './identity.json';
 import profileData from './profile.json';
+import type { Recipe } from '../domain/care/types';
 
 export type MockHomeData = typeof homeData;
 export type MockNewsItem = (typeof newsData)[0];
@@ -91,7 +92,10 @@ export function loadMessageById(id: string) {
  * Load care data (recipes and procedures)
  */
 export function loadCareData() {
-  return careData;
+  return {
+    ...careData,
+    recipes: careData.recipes as Recipe[],
+  };
 }
 
 /**

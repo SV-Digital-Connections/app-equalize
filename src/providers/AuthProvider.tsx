@@ -6,8 +6,6 @@ import { RemoteUserRepository } from '../infra/user/RemoteUserRepository';
 import { config } from '../app/config';
 import { log } from '../utils/log';
 
-// TODO: Install @react-native-async-storage/async-storage for persistence
-// For now, using in-memory storage
 const inMemoryStorage = {
   token: null as string | null,
   user: null as User | null,
@@ -42,29 +40,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       setIsLoading(true);
 
-      // Create auth repository with function to get current token
       const authRepo = new RemoteAuthRepository(config.apiBaseUrl, () => token ?? undefined);
 
-      // Login and get token
       const authResponse: AuthResponse = await authRepo.login(credentials);
       log.info('Auth response token_type:', authResponse.token_type);
       log.info('Auth response token (first 20 chars):', authResponse.token?.substring(0, 20));
-      
+
       const fullToken = authResponse.token_type
         ? `${authResponse.token_type} ${authResponse.token}`
         : `Bearer ${authResponse.token}`;
-      
+
       log.info('Formatted token for header:', fullToken.substring(0, 30) + '...');
 
-      // Save token in memory
       inMemoryStorage.token = fullToken;
       setToken(fullToken);
 
-      // Fetch user data with new token
       const userRepo = new RemoteUserRepository(config.apiBaseUrl, fullToken);
       const userData = await userRepo.getMe();
 
-      // Save user data in memory
       inMemoryStorage.user = userData;
       setUser(userData);
 
@@ -86,7 +79,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       log.warn('Logout API call failed (non-critical):', error);
     } finally {
-      // Clear local state and memory
       inMemoryStorage.token = null;
       inMemoryStorage.user = null;
       setToken(null);

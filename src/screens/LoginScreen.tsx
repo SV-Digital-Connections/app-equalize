@@ -20,7 +20,6 @@ export default function LoginScreen({ onEnter }: Props) {
   const { login, isLoading } = useAuth();
 
   const handleLogin = async () => {
-    // In mock mode, skip authentication and navigate directly
     if (isMockMode()) {
       onEnter();
       return;
@@ -35,9 +34,8 @@ export default function LoginScreen({ onEnter }: Props) {
       await login({
         email: email.trim(),
         password,
-        device_name: 'mobile-app', // ou use Device.modelName se disponível
+        device_name: 'mobile-app',
       });
-      // Login successful, navigate
       onEnter();
     } catch (error) {
       Alert.alert(

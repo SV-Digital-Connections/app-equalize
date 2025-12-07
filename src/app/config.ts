@@ -1,6 +1,6 @@
 /**
  * App Configuration
- * 
+ *
  * Centralized configuration to control data sources and API integration.
  * Switch between mock data (JSON files) and real API endpoints.
  */
@@ -12,11 +12,11 @@ export type AppConfig = {
    * Data source mode:
    * - 'mock': Use local JSON files from src/mock/*.json
    * - 'remote': Use real API integration via HTTP requests
-   * 
+   *
    * Default: 'mock'
    */
   repoKind: RepoKind;
-  
+
   /**
    * Base URL for API endpoints (used when repoKind = 'remote')
    */
@@ -38,11 +38,9 @@ export type AppConfig = {
  * 3. Add apiToken if API requires authentication
  */
 export const config: AppConfig = {
-  repoKind: 'mock', // 'mock' para usar JSON local, 'remote' para API real
-  apiBaseUrl: 'https://jornada.draalinevieiraequalize.com.br', // Base URL da API
-  apiToken: undefined, // ⚠️ IMPORTANTE: Adicione o token de autenticação aqui!
-  // Exemplo: apiToken: 'Bearer seu_token_jwt_aqui'
-  // ou: apiToken: 'Token abc123...'
+  repoKind: 'remote',
+  apiBaseUrl: 'https://jornada.draalinevieiraequalize.com.br',
+  apiToken: undefined,
 };
 
 /**

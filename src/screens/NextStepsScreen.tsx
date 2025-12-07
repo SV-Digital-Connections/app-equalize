@@ -18,7 +18,6 @@ export default function NextStepsScreen() {
   const userData = loadUserData();
 
   const handleRecipePress = (recipe: Recipe) => {
-    // Navegar para tela de detalhes ou abrir modal
     navigate('Care');
   };
 

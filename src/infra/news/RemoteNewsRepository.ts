@@ -38,7 +38,6 @@ export class RemoteNewsRepository implements NewsRepository {
       console.log('[RemoteNewsRepo] Response status:', res.status, res.statusText);
       console.log('[RemoteNewsRepo] Response headers:', Object.fromEntries(res.headers.entries()));
       
-      // Verificar content-type
       const contentType = res.headers.get('content-type');
       console.log('[RemoteNewsRepo] Content-Type:', contentType);
       
@@ -48,11 +47,9 @@ export class RemoteNewsRepository implements NewsRepository {
         throw new Error(`News list API error: ${res.status} - ${errorText}`);
       }
 
-      // Ler resposta como texto primeiro para debug
       const responseText = await res.text();
       console.log('[RemoteNewsRepo] 📄 Raw response (first 500 chars):', responseText.substring(0, 500));
       
-      // Verificar se é JSON mesmo
       if (!contentType?.includes('application/json')) {
         console.log('[RemoteNewsRepo] ⚠️ WARNING: Response is not JSON! Content-Type:', contentType);
         console.log('[RemoteNewsRepo] Full response:', responseText);

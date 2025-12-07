@@ -1,4 +1,5 @@
 import type { User, PatientProfile, UserRepository } from '../../domain/user/types';
+import { log } from '../../utils/log';
 
 /**
  * Remote User Repository
@@ -27,8 +28,8 @@ export class RemoteUserRepository implements UserRepository {
 
   async getMe(): Promise<User> {
     const url = `${this.baseUrl}/api/me`;
-    console.log('[RemoteUserRepo] 👤 Fetching user data from:', url);
-    console.log('[RemoteUserRepo] 🔑 Auth token (first 30 chars):', this.authToken?.substring(0, 30));
+    log.info('[RemoteUserRepo] 👤 Fetching user data from:', url);
+    log.info('[RemoteUserRepo] 🔑 Auth token (first 30 chars):', this.authToken?.substring(0, 30));
 
     try {
       const res = await fetch(url, {
@@ -36,26 +37,26 @@ export class RemoteUserRepository implements UserRepository {
         headers: this.getHeaders(),
       });
 
-      console.log('[RemoteUserRepo] Response status:', res.status);
+      log.info('[RemoteUserRepo] Response status:', res.status);
 
       if (!res.ok) {
         const errorText = await res.text();
-        console.log('[RemoteUserRepo] ❌ Error:', errorText);
+        log.error('[RemoteUserRepo] ❌ Error:', errorText);
         throw new Error(`Get user error: ${res.status}`);
       }
 
       const json = (await res.json()) as User;
-      console.log('[RemoteUserRepo] ✅ User data received:', json);
+      log.info('[RemoteUserRepo] ✅ User data received:', json);
       return json;
     } catch (error) {
-      console.log('[RemoteUserRepo] 💥 Fetch error:', error);
+      log.error('[RemoteUserRepo] 💥 Fetch error:', error);
       throw error;
     }
   }
 
   async getProfile(): Promise<PatientProfile> {
     const url = `${this.baseUrl}/api/profile`;
-    console.log('[RemoteUserRepo] 🏥 Fetching patient profile from:', url);
+    log.info('[RemoteUserRepo] 🏥 Fetching patient profile from:', url);
 
     try {
       const res = await fetch(url, {
@@ -63,19 +64,19 @@ export class RemoteUserRepository implements UserRepository {
         headers: this.getHeaders(),
       });
 
-      console.log('[RemoteUserRepo] Response status:', res.status);
+      log.info('[RemoteUserRepo] Response status:', res.status);
 
       if (!res.ok) {
         const errorText = await res.text();
-        console.log('[RemoteUserRepo] ❌ Error:', errorText);
+        log.error('[RemoteUserRepo] ❌ Error:', errorText);
         throw new Error(`Get profile error: ${res.status}`);
       }
 
       const json = (await res.json()) as PatientProfile;
-      console.log('[RemoteUserRepo] ✅ Patient profile received:', json);
+      log.info('[RemoteUserRepo] ✅ Patient profile received:', json);
       return json;
     } catch (error) {
-      console.log('[RemoteUserRepo] 💥 Fetch error:', error);
+      log.error('[RemoteUserRepo] 💥 Fetch error:', error);
       throw error;
     }
   }

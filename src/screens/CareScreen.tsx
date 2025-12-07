@@ -19,7 +19,6 @@ export default function Cuidados() {
   const [modalVisible, setModalVisible] = React.useState(false);
   const [selectedRecipe, setSelectedRecipe] = React.useState<Recipe | null>(null);
 
-  // Load care data from JSON
   const careData = loadCareData();
   const userData = loadUserData();
 
